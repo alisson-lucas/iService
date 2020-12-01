@@ -1,0 +1,104 @@
+.register-container {
+    width: 100%;
+    /* max-width: 1120px; */
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .register-container .content {
+    width: 100%;
+    padding: 96px;
+    /* background: #B0C4DE; */
+    box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    /* background-color: #B0C4DE; */
+    
+    display: flex;
+    /* justify-content: space-between; */
+    /* align-items: center; */
+  }
+  
+  .register-container .content section {
+    width: 100%;
+    max-width: 380px;
+  }
+
+  .register-container .content section img {
+    width: 200px;
+  }
+
+  .left {
+    background: #000080;
+    margin-left: 100px;
+    padding: 90px;
+    width: 400px;
+    height: 380px;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
+  }
+
+  .right {
+    background: #fff;
+    padding: 90px;
+    /* margin-left: 100px; */
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
+  }
+  
+  .register-container .content section h1 {
+    margin: 64px 0 32px;
+    font-size: 32px;
+    color: #fff;
+  }
+  
+  .register-container .content section p {
+    font-size: 18px;
+    color: #fff;
+    line-height: 32px;
+  }
+  
+  .register-container .content form {
+    width: 100%;
+    max-width: 450px;
+  }
+  
+  .register-container .content form input {
+    flex: 1;
+  background: #F0F0F5;
+  border-radius: 8px;
+  border: 0;
+  border-color: #000080;
+  padding: 16px;
+  margin: 10px;
+  font-size: 16px;
+  color: #000080;
+  }
+
+  .register-container .content form button {
+    width: 260px;
+    height: 56px;
+    background: #000080;
+    border-radius: 8px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+    border: 0;
+    align-self: flex-end;
+    margin-top: 40px;
+    margin-left: 10px;
+    transition: background-color 0.2s;
+    cursor: pointer;
+  }
+  
+  .register-container .content form .input-group {
+    display: flex;
+  }
+  
+  .register-container .content form .input-group input + input {
+    margin-left: 8px;
+  }
