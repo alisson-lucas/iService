@@ -2,6 +2,7 @@ const db = require("../models");
 const Servico = db.servicos;
 const Op = db.Sequelize.Op;
 
+//Criar um novo serviço
 exports.create = (req, res) => {
   // Validaçao
   if (!req.body.title) {
@@ -34,7 +35,7 @@ exports.create = (req, res) => {
   });
 };
 
-
+//Buscar os serviços no banco
 exports.findAll = (req, res) => {
   const title = req.query.title;
   var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
@@ -52,10 +53,11 @@ exports.findAll = (req, res) => {
   });
 };
 
+//Buscar serviço especifico
 exports.findOne = (req, res) => {
   const id = req.params.id;
 
-  Tutorial.findById(id)
+  Servico.findById(id)
     .then(data => {
       res.send(data);
     })
@@ -64,5 +66,30 @@ exports.findOne = (req, res) => {
       message: "Erro ao buscar o servico com o id=" + id
     });
   });
+};
+
+//Excluir um serviço
+exports.delete = (req, res) => {
+  const id = req.params.id;
+
+  Servico.destroy({
+    where: { id: id }
+  })
+    .then(num => {
+      if (num == 1) {
+        res.send({
+          message: "O serviço foi excluido com sucesso!"
+        });
+      } else {
+        res.send({
+          message: `Não foi possível excluir o serviço com o id=${id}. Talvez não foi possivel encontra-lo!`
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Não foi possível excluir o serviço com o id=" + id
+      });
+    });
 };
 

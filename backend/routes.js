@@ -1,8 +1,20 @@
-module.exports = app => {
-    const servicos = require('./controllers/servico.controller');
+const express = require('express');
+
+
+const servicosController = require('./controllers/servico.controller');
   
-    var router = require("express").Router();
+const routes = express.Router();
   
     // Criar novo Servico
-    router.post("/", servicos.create);
-};  
+routes.post("/", servicosController.create);
+
+    // Buscar serviços 
+routes.get("/servicos", servicosController.findAll);
+
+    // Buscar serviço por id
+routes.get("/:id", servicosController.findOne);
+
+    // Excluir servço
+routes.delete("/:id", servicosController.delete);
+
+module.exports = routes;

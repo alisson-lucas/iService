@@ -2,10 +2,10 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const servicos = require('./controllers/servico.controller');
+const routes = require('./routes');
 
 const app = express();
 
-require("./routes")(app);
 
 var corsOptions = {
     origin: "http://localhost:8081"
@@ -17,16 +17,20 @@ app.use(bodyParser.json());
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// app.use(routes);
+app.use(routes);
 
 const db = require("./models");
 db.sequelize.sync();
+
+//Caso precise alterar campos no banco de dados use
+// db.sequelize.sync({ force: true }).then(() => {
+//     console.log("Drop and re-sync db.");
+// });
 
 app.get("/", (req, res) => {
     res.json({ message: "Bem vindo, aplicação funcionando :)." });
 });
 
-app.post("/", servicos.create);
 
 //porta que ele vai escutar as requisições
 const PORT = process.env.PORT || 3333;
