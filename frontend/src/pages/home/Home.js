@@ -17,7 +17,7 @@ export default function Home() {
           {/* <img src={logoImg} alt="Be The Hero"/> */}
 
           <h1>Cadastro</h1>
-          <p>Faça seu cadastro, e divulgue seu serviço para novas pessoas.</p>
+          <p>Faça seu cadastro, para se cadastrar</p>
 
           {/* <Link className="back-link" to="/">
             <FiArrowLeft size={16} color="#E02041" />
