@@ -30,12 +30,29 @@
     width: 200px;
   }
 
+  .register-container .content section button {
+    width: 260px;
+    height: 56px;
+    background: #fff;
+    border-radius: 8px;
+    color: #000080;
+    font-weight: bold;
+    font-size: 16px;
+    border: 0;
+    align-self: flex-end;
+    margin-top: 40px;
+    margin-left: 10px;
+    transition: background-color 0.2s;
+    cursor: pointer;
+  }
+
+
   .left {
     background: #000080;
     margin-left: 100px;
     padding: 90px;
     width: 400px;
-    height: 380px;
+    height: 450px;
     border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
     box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
@@ -44,10 +61,18 @@
   .right {
     background: #fff;
     padding: 90px;
+    height: 450px;
     /* margin-left: 100px; */
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
     box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
+  }
+
+  .right p {
+    font-size: 18px;
+    line-height: 32px;
+    margin-top: -25px;
+    margin-left: 5px;
   }
   
   .register-container .content section h1 {

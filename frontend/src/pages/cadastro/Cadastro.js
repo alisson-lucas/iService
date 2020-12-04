@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-// import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 // import { FiArrowLeft } from 'react-icons/fi';
 
-// import api from '../../services/api';
+import api from '../../services/api';
 import './styles.css';
 
 import logoImg from '../../assets/iservice_icon_wite.png';
@@ -11,10 +11,11 @@ export default function Register() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [prestador, setPrestador] = useState('');
-  const [city, setCity] = useState('');
-  const [uf, setUf] = useState('');
-
-  // const history = useHistory();
+  const [localizacao, setLocalizacao] = useState('');
+  const [latitude, setLatitude] = useState('');
+  const [longitude, setLongitude] = useState('');
+  
+  const history = useHistory();
 
   async function handleRegister(e) {
     e.preventDefault();
@@ -23,19 +24,20 @@ export default function Register() {
       title,
       description,
       prestador,
-      city,
-      uf,
+      localizacao,
+      latitude,
+      longitude
     };
 
-    // try {
-    //   const response = await api.post('ongs', data);
+    try {
+      const response = await api.post('/', data);
 
-    //   alert(`Seu ID de acesso: ${response.data.id}`);
+      alert(`Seu ID de acesso: ${response.data.id}`);
 
-    //   history.push('/');
-    // } catch (err) {
-    //   alert('Erro no cadastro, tente novamente.');
-    // }
+      history.push('/');
+    } catch (err) {
+      alert('Erro no cadastro, tente novamente.');
+    }
   }
 
   return (
@@ -48,6 +50,10 @@ export default function Register() {
             <h1>iService</h1>
             <p>Divulgue seu serviço para novas pessoas.</p>
 
+            <Link to="/servicos">
+              <button className="button" type="submit">Encontrar serviços</button>
+            </Link>
+
             {/* <Link className="back-link" to="/">
               <FiArrowLeft size={16} color="#E02041" />
               Não tenho cadastro
@@ -55,6 +61,7 @@ export default function Register() {
           </section>
         </div> 
         <div className="right">
+        <p>Cadastre-se, é grátis!</p>
           <form onSubmit={handleRegister}>
             <input 
               placeholder="Nome do servço"
@@ -75,18 +82,24 @@ export default function Register() {
               onChange={e => setPrestador(e.target.value)}
             />
 
+            <input 
+              placeholder="Cidade"
+              value={localizacao}
+              onChange={e => setLocalizacao(e.target.value)}
+            />
+
             <div className="input-group">
               <input 
-                placeholder="Localização"
-                value={city}
-                onChange={e => setCity(e.target.value)}
+                placeholder="Latitude"
+                value={latitude}
+                onChange={e => setLatitude(e.target.value)}
               />
 
               <input 
-                placeholder="UF" 
+                placeholder="Longitude" 
                 style={{ width: 90 }}
-                value={uf}
-                onChange={e => setUf(e.target.value)}
+                value={longitude}
+                onChange={e => setLongitude(e.target.value)}
               />
             </div>
 
