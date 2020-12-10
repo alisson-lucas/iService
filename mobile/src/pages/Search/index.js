@@ -1,11 +1,20 @@
 import React from 'react';
 import { View, Text, StyleSheet  } from 'react-native';
+import { Wrapper, Header, TitleContainer, Title, Balance} from './styles';
+
+import Map from '../../components/Map'
+
 
 export default function Search() {
     return (
-        <View>
-            <Text>Tela 1</Text>
-        </View>
+        <Wrapper>
+            <Header>
+              <TitleContainer>
+                <Balance>Serviços</Balance>
+              </TitleContainer>
+            </Header>
+            <Map />
+        </Wrapper>
     ) 
 }
 
