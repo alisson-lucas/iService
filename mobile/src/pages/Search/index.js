@@ -3,6 +3,7 @@ import { View, Text, StyleSheet  } from 'react-native';
 import { Wrapper, Header, TitleContainer, Title, Balance} from './styles';
 
 import Map from '../../components/Map'
+import Map2 from '../../components/Map2'
 
 
 export default function Search() {
@@ -13,7 +14,7 @@ export default function Search() {
                 <Balance>Serviços</Balance>
               </TitleContainer>
             </Header>
-            <Map />
+            <Map2 />
         </Wrapper>
     ) 
 }
