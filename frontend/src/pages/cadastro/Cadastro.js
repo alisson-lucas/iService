@@ -5,7 +5,8 @@ import { Link, useHistory } from 'react-router-dom';
 import api from '../../services/api';
 import './styles.css';
 
-import logoImg from '../../assets/iservice_icon_wite.png';
+import logoImg from'../../assets/iservice_icon_blue.png';
+import celular from '../../assets/celular principal.png';
 
 export default function Register() {
   const [title, setTitle] = useState('');
@@ -41,72 +42,24 @@ export default function Register() {
   }
 
   return (
-    <div className="register-container">
-      <div className="content">
-        <div className="left">
-          <section>
-            <img src={logoImg} alt="iService"/>
-
-            <h1>iService</h1>
-            <p>Divulgue seu serviço para novas pessoas.</p>
-
-            <Link to="/servicos">
-              <button className="button" type="submit">Encontrar serviços</button>
-            </Link>
-
-            {/* <Link className="back-link" to="/">
-              <FiArrowLeft size={16} color="#E02041" />
-              Não tenho cadastro
-            </Link> */}
-          </section>
-        </div> 
-        <div className="right">
-        <p>Cadastre-se, é grátis!</p>
-          <form onSubmit={handleRegister}>
-            <input 
-              placeholder="Nome do servço"
-              value={title}
-              onChange={e => setTitle(e.target.value)}
-            />
-
-            <input 
-              type="Descrição" 
-              placeholder="descricao"
-              value={description}
-              onChange={e => setDescription(e.target.value)}
-            />
-
-            <input 
-              placeholder="Prestador"
-              value={prestador}
-              onChange={e => setPrestador(e.target.value)}
-            />
-
-            <input 
-              placeholder="Cidade"
-              value={localizacao}
-              onChange={e => setLocalizacao(e.target.value)}
-            />
-
-            <div className="input-group">
-              <input 
-                placeholder="Latitude"
-                value={latitude}
-                onChange={e => setLatitude(e.target.value)}
-              />
-
-              <input 
-                placeholder="Longitude" 
-                style={{ width: 90 }}
-                value={longitude}
-                onChange={e => setLongitude(e.target.value)}
-              />
+    <>
+        <div className="header">   
+            <img src={logoImg} align="left" alt="logo" width="300px"/>
+            <div>
+                <a href=""className="btn-text-primary"> Ja tem conta? Entrar</a>
+                <a href="" className="btn-primary">Cadastrar</a>
             </div>
-
-            <button className="button" type="submit">Cadastrar</button>
-          </form>
         </div>
-      </div>
-    </div>
+        
+        <div className="CellPrinc">
+            <div className="text-container">
+                <h2 className="text-Secondary">Viemos para mudar a forma <br/> de como você divulga o seu <br/>trabalho</h2>
+                <p>Entre agora e divulge seu trabalho para quem realmente está procurando o serviço ideal</p>
+                <button className="btn-singUp">Começe ja</button>
+            </div>
+                <img src={celular} className="imgIph" align="left"/>
+    
+        </div>
+    </>
   );
 }
