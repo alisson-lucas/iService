@@ -75,3 +75,46 @@ color: #FFFFFF;
   font-size: 30px;
 
 }
+
+.imgFundo{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100vw;
+  height: 100vh;
+  background-image: url(../../../src/assets/imgFundo.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: #0000ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+}
+
+
+.imgFundo p {
+  position: relative;
+   
+  top: 0px;
+  left: 0px;
+  
+}
+
+.textFundo{
+  margin-top: 5%;
+  margin-left: 2%;
+  font-size: 30px;
+  padding-right: 40%;
+  color: white;
+}
+
+.textFundo_{
+  color: white;
+  margin-top: 15%;
+  font-size: 30px;
+  padding-left: 60%;
+}
+
+

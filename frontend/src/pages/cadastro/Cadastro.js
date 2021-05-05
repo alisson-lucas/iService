@@ -7,6 +7,7 @@ import './styles.css';
 
 import logoImg from'../../assets/iservice_icon_blue.png';
 import celular from '../../assets/celular principal.png';
+import imgFundo from '../../assets/imgFundo.png';
 
 export default function Register() {
   const [title, setTitle] = useState('');
@@ -60,6 +61,22 @@ export default function Register() {
                 <img src={celular} className="imgIph" align="left"/>
     
         </div>
+        <div class="imgFundo">
+            <div class="textFundo">
+                <h2 class="textFundo">
+                    o iService tem como objetivo ajudar o prestador de serviço a divulgar facilmente o seu trabalho para vários potenciais clientes.
+                </h2>
+            </div>
+        <div class="textFundo_">
+            <h2>
+                E também ajudar o cliente a encontrar o serviço ideal e mais próximo possivel de onde se encontra.
+            </h2>
+        </div>
+    </div> 
+
+
+
+
     </>
   );
 }
