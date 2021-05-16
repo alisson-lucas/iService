@@ -117,4 +117,123 @@ color: #FFFFFF;
   padding-left: 60%;
 }
 
+/*-------- Login -----------*/
+
+*{
+  font-family: 'Noto Sans', sans-serif;
+}
+
+/*------- Logo Center ------ */
+
+.logo{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 42%;
+}
+
+.Enter1{
+  text-align: center;
+  margin-top: 16%;
+  margin-left: -13%;
+}
+
+.info1{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15%;
+}
+
+.info2:first-child{
+  border-radius: 0.25rem 0 0.25rem;    
+}
+
+.info2:last-child{
+  border-radius: 0 0.25rem 0.25rem 0;
+}
+
+.info1 input{
+  margin-top: 2%;
+  width: 200px;
+  height: 30px;
+}
+#balance{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 30px;
+  margin-top: 50px;
+}
+.mainContainer{
+  width: 40%;
+  text-align: center;
+  background-color:white;
+  display: flex;
+  flex-direction: column;
+  column-align: center;
+  box-shadow: black;
+  margin-left: 27%;
+  border: 2px solid black;
+  border-radius: 0.25rem;
+}
+.card input{
+  background: white;
+  padding: 1.5rem 2rem;
+  border-radius: 0.25rem;
+
+  border: none;
+  outline: none;
+  margin-bottom: 30px;
+
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  
+  background-color: #C4C4C4;
+}
+
+.card.texto{
+  background: #000080;
+  display: flex;
+  justify-content: space-between;
+}
+
+.card.login{
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+input:focus{
+  background-color:  #ccc;
+
+}
+.entrarButton{
+  background:#000080;
+  color: white;
+  border-radius: 12px;
+  height: 60px;
+  width: 176px;
+  margin: 10px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 46px;
+}
+.mainContainer a{
+  margin-bottom: 20px;
+  color: black;
+  display: block;
+}
+.mainContainer h2{
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: 23px;
+  line-height: 46px;
+  padding-top: 10px;
+}
+
 
