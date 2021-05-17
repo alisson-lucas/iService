@@ -47,7 +47,7 @@ export default function Register() {
         <div className="header">   
             <img src={logoImg} align="left" alt="logo" width="300px"/>
             <div>
-                <a href=""className="btn-text-primary"> Ja tem conta? Entrar</a>
+                <a href="" className="btn-text-primary"> Ja tem conta? Entrar</a>
                 <a href="" className="btn-primary">Cadastrar</a>
             </div>
         </div>

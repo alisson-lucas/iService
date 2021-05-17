@@ -1,0 +1,104 @@
+* {
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  .logo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    justify-content: center;
+  }
+  
+  .container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 95%;
+    display: flex;
+  }
+  
+  .card {
+    border: 1px solid #000;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    width: 50%;
+  }
+  
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 100%;
+  }
+  
+  .column {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+  
+  input {
+    background: white;
+    padding: 1.5rem 2rem;
+    border-radius: 0.25rem;
+    border: none;
+    outline: none;
+    background-color: #C4C4C4;
+  }
+  
+  
+  input:focus {
+    background-color: #ccc;
+  }
+  
+  label {
+    padding-bottom: 10px;
+    text-align: left;
+    padding-top: 20px;
+  }
+  
+  button {
+    background: #000080;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 20px;
+    width: fit-content;
+    padding: 20px 50px;
+    align-self: center;
+    margin: 20px 0;
+  }
+  
+  .col-6 {
+    flex: 1;
+    max-width: 50%;
+  }
+  
+  .d-flex {
+    display: flex;
+  }
+  
+  .justify-content-center {
+    justify-content: center;
+  }
+  
+  
+  @media screen and (max-width: 1124px) {
+    .col-6 {
+      max-width: 100%;
+    }
+  }
+  
+  @media screen and (max-width: 560px) {
+    .card {
+      width: 80%;
+    }
+  }
