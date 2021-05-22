@@ -1,7 +1,7 @@
 
 
 
-    <div class="logo">
+    <div className="logo">
         <header>
             <a href="../Home.html"><img src="../Assets/iservice_icon_blue.png" alt="" width="200"></a>
         </header>

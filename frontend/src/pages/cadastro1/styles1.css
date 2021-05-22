@@ -2,10 +2,9 @@
     font-family: 'Roboto', sans-serif;
   }
   
-  .logo {
+  .logoCadastro {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     justify-content: center;
   }
   
@@ -19,7 +18,7 @@
     display: flex;
   }
   
-  .card {
+  .card1 {
     border: 1px solid #000;
     border-radius: 10px;
     padding: 20px;
@@ -46,7 +45,7 @@
   
   input {
     background: white;
-    padding: 1.5rem 2rem;
+    padding: 20px;
     border-radius: 0.25rem;
     border: none;
     outline: none;
