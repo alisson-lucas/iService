@@ -1,36 +1,40 @@
+import logoImg from '../../assets/iservice_icon_blue.png';
+import './styles.css';
 
+export default function Login() {
+    return (
 
-
-    <div className="logo">
-        <header>
-            <a href="../Home.html"><img src="../Assets/iservice_icon_blue.png" alt="" width="200"></a>
-        </header>
-    </div>
-    <div class="mainContainer">
-        <section id="container">
-            <div>
-                <div class="card texto">
-                </div>
-                <h2 style="color: black;">Faça login para continuar</h2>
-                <div class="card">
-                    <div class="info1">
-                        <div class="info2">
-                            <div class="login">
-                                <input placeholder="Login" type="text">
-                            </div>
-                            <div class="senha">
-                                <input placeholder="Senha" type="password" size="10">
+        <>
+            <div className="logo">
+                <a href="../Home.html"><img src={logoImg} alt="" width="200" /></a>
+            </div>
+            <div class="mainContainer">
+                <div id="container">
+                    <div>
+                        <div classname="card texto">
+                        </div>
+                        <h2>Faça login para continuar</h2>
+                        <div classname="card">
+                            <div classname="info1">
+                                <div classname="info2">
+                                    <div classname="login">
+                                        <input placeholder="Login" type="text" />
+                                    </div>
+                                    <div classname="senha">
+                                        <input placeholder="Senha" type="password" />
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <button className="entrarButton">Entrar</button>
+                    <a href="Remeber">Esqueci a minha senha</a>
+                    <a href="../cadastro1/cadastro1">Não tem conta? Cadastre-se</a>
                 </div>
             </div>
-            <button class="entrarButton">Entrar</button>
-            <a href="">Esqueci a minha senha</a>
-            <a href="">Não tem conta? Cadastre-se</a>
-        </section>
-    </div>
+        </>
 
-</body>
 
-</html>
+    )
+
+}

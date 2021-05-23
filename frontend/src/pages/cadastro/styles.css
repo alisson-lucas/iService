@@ -1,6 +1,11 @@
 *{
-  font-family: 'Noto Sans', sans-serif;
+  font-family: 'Noto Sans', sans-serif
 }
+
+.HomePage{
+  width: 100%;
+}
+
 .header {
   display: flex;
   flex-direction: row;
