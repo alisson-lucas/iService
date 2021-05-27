@@ -41,3 +41,37 @@ export const LabelTitle = styled.Text`
     font-weight: bold;
     font-size: 20px;
 `;
+
+export const BtnContainer = styled.View`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 10px;
+
+`
+
+export const BtnFavorite = styled.TouchableOpacity`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 159px;
+    height: 46px;
+    border-radius: 8px;
+    background-color: #000080;
+`
+export const BtnAvaliation = styled.TouchableOpacity`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 159px;
+    height: 46px;
+    border-radius: 8px;
+    background-color: #000080;
+`
+
+export const BtnText = styled.Text`
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+`

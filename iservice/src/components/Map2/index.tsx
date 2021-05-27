@@ -76,8 +76,8 @@ export default function Map2(){
 
 const styles = StyleSheet.create({
     map: {
-        width: 350,
-        height: 480,
+        width: 330,
+        height: 430,
         borderRadius: 25
     },
     callout: {
