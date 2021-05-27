@@ -15,6 +15,22 @@ export const Header = styled.View`
 
 export const BackButton = styled.TouchableOpacity``;
 
+export const DetailContainer = styled.View`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 50px;
+    padding-bottom: 55%;
+`;
+
+
+export const ProviderImage = styled.Image`
+    background-color: blue;
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+`;
+
 export const DetailTitle = styled.Text`
     font-size: 40px;
     font-weight: bold;
@@ -25,20 +41,18 @@ export const DetailTitle = styled.Text`
 export const DetailProvider = styled.Text`
     font-size: 20px;
     margin-top: 10px;
-    margin-left: 20px;
 `;
 
 export const DetailDescription = styled.Text`
     font-size: 16px;
     margin-top: 10px;
-    margin-left: 20px;
 `;
 
 export const ButtonContainer = styled.View`
     flex-direction: row;
     justify-content: space-around;
-    margin-top: 95%;
-    margin-bottom: 40px;
+    margin-top: 75%;
+    margin-bottom: 90px;
 `;
 
 export const DetailButton = styled.TouchableOpacity`
@@ -47,7 +61,6 @@ export const DetailButton = styled.TouchableOpacity`
     align-items: center;
     padding: 15px;
     border-radius: 7px;
-    margin-top: 20px;
     margin-left: 10px;
 `;
 
@@ -57,7 +70,6 @@ export const DetailButton2 = styled.TouchableOpacity`
     align-items: center;
     padding: 15px;
     border-radius: 7px;
-    margin-top: 20px;
     margin-left: 10px;
 `;
 

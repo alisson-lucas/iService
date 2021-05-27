@@ -1,12 +1,19 @@
 import React from 'react';
 import { View, Text, StyleSheet  } from 'react-native';
 import { Wrapper, Header, TitleContainer, LabelContainer, LabelTitle, Title, Balance,BtnContainer, BtnFavorite, BtnAvaliation, BtnText} from './styles';
-
+import { useNavigation } from '@react-navigation/native';
 // import Map from '../../components/Map'
 import Map2 from '../../components/Map2'
 
 
 export default function Search() {
+
+    const navigation = useNavigation();
+
+    function handleNavigateFavorite(){
+        navigation.navigate('Favorite');
+    };
+
     return (
         <Wrapper>
             {/* <Header>
@@ -21,7 +28,7 @@ export default function Search() {
 
             <BtnContainer>
                 <BtnFavorite>
-                    <BtnText>Favoritos</BtnText>
+                    <BtnText onPress={handleNavigateFavorite}>Favoritos</BtnText>
                 </BtnFavorite>
                 <BtnAvaliation>
                     <BtnText>Avaliações</BtnText>

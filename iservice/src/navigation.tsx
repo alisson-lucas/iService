@@ -8,6 +8,7 @@ import { Foundation as Icon} from '@expo/vector-icons'
 import SearchScreen from './pages/Search';
 import ProfileScreen from './pages/Profile';
 import DetailScreen from './pages/Detail';
+import FavoriteScreen from './pages/Favorite';
 import { Header } from 'react-native/Libraries/NewAppScreen';
 
 
@@ -56,6 +57,7 @@ export default function Navigation() {
         <Stack.Navigator>
           <Stack.Screen name="Search" component={SearchTabs} options={{headerShown:false}}/>
           <Stack.Screen name="Detail" component={DetailScreen} options={{headerShown:false}}/>
+          <Stack.Screen name="Favorite" component={FavoriteScreen} />
         </Stack.Navigator>
     );
 }
