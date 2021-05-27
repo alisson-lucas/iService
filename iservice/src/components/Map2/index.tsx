@@ -1,5 +1,5 @@
 import React, {Component, useRef, useState, useEffect} from 'react'
-import MapView, { Marker, Callout } from 'react-native-maps'
+import MapView, { PROVIDER_GOOGLE, Marker, Callout } from 'react-native-maps'
 import {View, StyleSheet, Text, TouchableOpacity, Alert} from 'react-native'
 import { Container, PopupContainer, PopupTitle, PopupProvider, PopupDescription, ButtonContainer, PopupButton, PopupButton2, ButtonText } from './styles';
 import { Modalize } from 'react-native-modalize';
@@ -41,7 +41,7 @@ export default function Map2(){
     return(
         <Container>
             {initialPosition[0] != 0 && (
-            <MapView initialRegion={{latitude:initialPosition[0], longitude:initialPosition[1], latitudeDelta: 0.004, longitudeDelta: 0.004}} style={styles.map}>
+            <MapView provider={PROVIDER_GOOGLE} initialRegion={{latitude:initialPosition[0], longitude:initialPosition[1], latitudeDelta: 0.004, longitudeDelta: 0.004}} style={styles.map}>
                     <Marker coordinate={{latitude: -7.951833 , longitude: -34.8777377}} onPress={handleNavigateDetail}>
                     {/* <Image style={styles.icone} source={Drone} /> */}
                         <Callout >
