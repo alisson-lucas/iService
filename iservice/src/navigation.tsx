@@ -9,6 +9,7 @@ import SearchScreen from './pages/Search';
 import ProfileScreen from './pages/Profile';
 import DetailScreen from './pages/Detail';
 import FavoriteScreen from './pages/Favorite';
+import LoginScreen from './pages/Login';
 import { Header } from 'react-native/Libraries/NewAppScreen';
 
 
@@ -46,6 +47,7 @@ function SearchTabs(){
         },
         activeTintColor:'#000080'}}
       >
+        <Tab.Screen name="Login" component={LoginScreen} />
         <Tab.Screen name="Search" component={SearchScreen} />
         <Tab.Screen name="Profile" component={ProfileScreen} />
       </Tab.Navigator>
