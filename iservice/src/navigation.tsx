@@ -10,6 +10,7 @@ import ProfileScreen from './pages/Profile';
 import DetailScreen from './pages/Detail';
 import FavoriteScreen from './pages/Favorite';
 import LoginScreen from './pages/Login';
+import UserSignScreen from './pages/UserSignIn';
 import { Header } from 'react-native/Libraries/NewAppScreen';
 
 
@@ -60,6 +61,7 @@ export default function Navigation() {
           <Stack.Screen name="Search" component={SearchTabs} options={{headerShown:false}}/>
           <Stack.Screen name="Detail" component={DetailScreen} options={{headerShown:false}}/>
           <Stack.Screen name="Favorite" component={FavoriteScreen} />
+          <Stack.Screen name="UserSignIn" component={UserSignScreen} options={{headerShown:false}}/>
         </Stack.Navigator>
     );
 }
