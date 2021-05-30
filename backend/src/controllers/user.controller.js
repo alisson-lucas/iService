@@ -24,3 +24,19 @@ exports.update = (req, res) => {
     return res.status(response.status).send({ data: response.data, message: response.message });
   })
 };
+
+exports.find = (req, res) => {
+  const condition = req.query;
+
+  userService.find(condition,(response) => {
+    return res.status(response.status).send({ data: response.data, message: response.message });
+  })
+};
+
+exports.get = (req, res) => {
+  const userId = req.params.id;
+
+  userService.get(userId, (response) => {
+    return res.status(response.status).send({ data: response.data, message: response.message });
+  })
+};

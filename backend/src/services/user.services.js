@@ -79,3 +79,42 @@ module.exports.update = (newUser, callback) => {
         })
     });
 };
+
+module.exports.find = (condition, callback) => {
+    UserDB.findAll({ where: condition })
+    .then(response => {
+        callback({
+            data: response,
+            status: HttpCodes.OK,
+        });
+    })
+    .catch(err => {
+        callback({
+            status: HttpCodes.INTERNAL_SERVER_ERROR,
+            message: err.message
+        })
+    });
+};
+
+module.exports.get = (userId, callback) => {
+    UserDB.findOne({ where: { id: userId } })
+    .then(user => {
+        if (user) {
+            callback({
+                data: user,
+                status: HttpCodes.OK,
+            });
+        } else {
+            callback({
+                status: HttpCodes.NOT_FOUND,
+                message: "Not found user with this id"
+            });
+        }
+    })
+    .catch(err => {
+        callback({
+            status: HttpCodes.INTERNAL_SERVER_ERROR,
+            message: err.message
+        })
+    });
+};
