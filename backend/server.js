@@ -36,6 +36,6 @@ app.get("/", (req, res) => {
 
 //porta que ele vai escutar as requisições
 const PORT = process.env.PORT || 3333;
-    app.listen(PORT, () => {
+app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}.`);
 });

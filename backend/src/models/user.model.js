@@ -1,4 +1,4 @@
-const crypto = require('crypto')
+const crypto = require('crypto');
 
 module.exports = (sequelize, Sequelize) => {
     const User = sequelize.define("user", {
@@ -63,13 +63,13 @@ module.exports = (sequelize, Sequelize) => {
           .createHash("RSA-SHA256")
           .update(plainText)
           .update(salt)
-          .digest("hex")
+          .digest("hex");
     }
 
     const setSaltAndPassword = user => {
       if (user.changed("password")) {
-          user.salt = User.generateSalt()
-          user.password = User.encryptPassword(user.password(), user.salt())
+          user.salt = User.generateSalt();
+          user.password = User.encryptPassword(user.password(), user.salt());
       }
     }
 
