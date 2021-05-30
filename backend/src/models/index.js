@@ -14,11 +14,12 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
   }
 });
 
-const db = {};
+const servicos = require("./servico.model.js")(sequelize, Sequelize);
+const user = require("./user.model.js")(sequelize, Sequelize);
 
-db.Sequelize = Sequelize;
-db.sequelize = sequelize;
-
-db.servicos = require("./servico.model.js")(sequelize, Sequelize);
-
-module.exports = db;
+module.exports = {
+  Sequelize,
+  sequelize,
+  servicos,
+  user
+};

@@ -1,7 +1,9 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const routes = require('./routes');
+
+const routes = require("./src/routes");
+const userRoutes = require("./src/routes/user.routes");
 
 const app = express();
 
@@ -17,8 +19,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(routes);
+app.use(userRoutes);
 
-const db = require("./models");
+const db = require("./src/models");
 db.sequelize.sync();
 
 //Caso precise alterar campos no banco de dados use

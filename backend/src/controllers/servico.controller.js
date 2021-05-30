@@ -11,7 +11,7 @@ exports.create = (req, res) => {
     });
     return;
   }
-  
+
   // Criar um servico
   const servico = {
     title: req.body.title,
@@ -57,8 +57,13 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
   const id = req.params.id;
 
-  Servico.findById(id)
+  Servico.findOne({ where: { id }})
     .then(data => {
+      if (data == null) {
+        res.status(400).send({
+          message: "Servico nao existente"
+        })
+      }
       res.send(data);
     })
     .catch(err => {
