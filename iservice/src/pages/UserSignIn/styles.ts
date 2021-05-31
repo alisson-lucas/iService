@@ -7,6 +7,10 @@ export const Container = styled.SafeAreaView`
     background-color: #fff;
 `;
 
+export const ScrollContainer = styled.ScrollView`
+    background-color: #fff;
+`;
+
 export const Text = styled.Text`
     margin-top: 67px;
     font-size: 15px;
