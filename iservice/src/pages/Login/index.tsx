@@ -19,7 +19,7 @@ export default function Login(){
         <FormContainer>
             <LogoImage source={Logo}></LogoImage>
             <Text>Faça login para continuar</Text>
-            <TextInput placeholder="Login"></TextInput>
+            <TextInput placeholder="Email"></TextInput>
             <TextInput placeholder="Senha"></TextInput>
             <FormButton>
                 <TextButton>Login</TextButton>

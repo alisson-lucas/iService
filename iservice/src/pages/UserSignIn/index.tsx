@@ -35,7 +35,7 @@ export default function UserSignIn(){
             }
           }
           />
-          <TextInput placeholder="Login"></TextInput>
+          <TextInput placeholder="Email"></TextInput>
           <TextInput placeholder="Senha"></TextInput>
           <TextInput placeholder="Repetir senha"></TextInput>
           <TextInput placeholder="Nome"></TextInput>
