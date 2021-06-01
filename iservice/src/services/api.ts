@@ -1,7 +1,11 @@
 import Axios from 'axios';
 
-const api = Axios.create({
+export const api = Axios.create({
   baseURL: 'http://10.0.0.103:3333/'
-})
+});
 
-export default api;
+export const apiProfissoes = Axios.create({
+  baseURL: 'http://apps.diogomachado.com/api-profissoes/'
+});
+
+

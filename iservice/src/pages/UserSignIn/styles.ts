@@ -1,10 +1,11 @@
 import styled from 'styled-components/native';
 
-export const Container = styled.SafeAreaView`
+export const Container = styled.KeyboardAvoidingView`
     flex: 1;
     align-items: center;
     /* justify-content: center; */
     background-color: #fff;
+    /* margin-bottom: 10px; */
 `;
 
 export const ScrollContainer = styled.ScrollView`
@@ -22,7 +23,8 @@ export const TextInput = styled.TextInput`
     border-radius: 50px;
     background-color: #EDEDED;
     margin-top: 22px;
-    padding-left: 120px;
+    text-align: center;
+    /* padding-left: 120px; */
 `;
 
 export const SelectView = styled.View`
@@ -30,7 +32,9 @@ export const SelectView = styled.View`
     height: 49px;
     border-radius: 50px;
     background-color: #EDEDED;
-    padding: 15px 110px;
+    justify-content: center;
+    text-align: center;
+    padding-left: 110px;
     margin-top: 22px;
     color: #fff;
     /* border-bottom-width: 1px;

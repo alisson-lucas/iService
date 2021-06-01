@@ -1,7 +1,9 @@
-import React,{useState} from 'react';
-import { View, Alert } from 'react-native';
+import React,{useState, useEffect} from 'react';
+import { View, Alert, Platform } from 'react-native';
 import RNPickerSelector from 'react-native-picker-select';
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
+
+import { apiProfissoes } from '../../services/api';
 
 import { Container, ScrollContainer, Text, TextInput, SelectView, FormButton, TextButton } from './styles';
 
@@ -9,6 +11,17 @@ export default function UserSignIn(){
   const [type, setType] = useState('');
   const [isProfessional, setIsProfessional] = useState(false);
   const [radioValue, setRadioValue] = useState('');
+  const [profission, setProfission] = useState('');
+  const [professionChoosed, setProfessionChoosed] = useState('');
+
+  useEffect(() => {
+    apiProfissoes.get(`v1?callback=CALLBACK_JSONP&s=${setProfission}`).then(
+      response => {
+        // setProfessionChoosed(response.data)
+        // console.log(response.request)
+      }
+    )
+  },[profission]);
 
   var profissoes = [
     {label: 'Cliente', value: 'Cliente' },
@@ -17,7 +30,7 @@ export default function UserSignIn(){
 
   return (
     <ScrollContainer>
-      <Container>
+      <Container behavior={Platform.OS == 'ios' ? 'padding' : 'height'}>
           <Text>Insira seus dados para concluir o cadastro</Text>
           <RadioForm 
           radio_props={profissoes}
@@ -58,6 +71,7 @@ export default function UserSignIn(){
                   placeholder={{ label: 'Gênero', value: ''}}
                   />
               </SelectView>
+              <TextInput placeholder="Profissão"  onChangeText={value => setProfission(value)}></TextInput>
             </> : <></>
           }
           
