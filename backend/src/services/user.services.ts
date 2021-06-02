@@ -6,8 +6,8 @@ import UserUpdate from "../interfaces/request/userUpdate.interface";
 import DataResponse from "../interfaces/response/dataResponse.interface";
 import { User } from "./../models/index";
 
-class UserService {
-    public async register(newUser: UserRegister): Promise<DataResponse> {
+abstract class UserService {
+    public static async register(newUser: UserRegister): Promise<DataResponse> {
         return await User.create(<any>newUser)
         .then(data => {
            return {
@@ -26,7 +26,7 @@ class UserService {
         
     };
 
-    public async find(condition: any): Promise<DataResponse> {
+    public static async find(condition: any): Promise<DataResponse> {
         return await User.findAll({ where: condition })
             .then(data => {
                 return {
@@ -42,13 +42,17 @@ class UserService {
             });
     };
 
-    public async login(userLogin: UserLogin): Promise<DataResponse> {
+    public static async login(userLogin: UserLogin): Promise<DataResponse> {
         return await User.findOne({ where: { username: userLogin.username }})
             .then(userFound => {
                 if (userFound && userFound.correctPassword(userLogin.password)) {
                     return {
+                        data: {
+                            username: userFound.username,
+                            name: userFound.name
+                        },
                         status: StatusCodes.OK,
-                        message: "User authenticated with sucess"
+                        message: "User authenticated with success"
                     };
                 };
 
@@ -65,7 +69,7 @@ class UserService {
             });
     };
 
-    public async get(userId: string): Promise<DataResponse> {
+    public static async get(userId: string): Promise<DataResponse> {
         return await User.findOne({ where: { id: userId } })
             .then(user => {
                 if (user) {
@@ -88,7 +92,7 @@ class UserService {
             });
     };
 
-    public async update(userUpdate: UserUpdate): Promise<DataResponse> {
+    public static async update(userUpdate: UserUpdate): Promise<DataResponse> {
         return await User.findOne({ where: { username: userUpdate.username }})
             .then(async userFound => {
                 if (userFound && userFound.correctPassword(userUpdate.password)) {
@@ -125,4 +129,4 @@ class UserService {
     };
 };
 
-export default new UserService();
+export default UserService;

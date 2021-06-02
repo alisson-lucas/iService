@@ -1,6 +1,7 @@
 import express from 'express';
 import * as http from 'http';
 import * as bodyparser from 'body-parser';
+import cookieParser = require('cookie-parser');
 import * as winston from 'winston';
 import * as expressWinston from 'express-winston';
 import cors from 'cors'
@@ -24,7 +25,16 @@ const debugLog: debug.IDebugger = debug('app');
 const port = process.env.APP_PORT || 3000;
 
 app.use(bodyparser.json());
-app.use(cors());
+app.use(cors(
+    {
+        allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'X-Access-Token', 'Authorization'],
+        credentials: true,
+        methods: 'GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE',
+        origin: "http://localhost:3000",
+        preflightContinue: false,
+    }
+));
+app.use(cookieParser());
 
 app.use(expressWinston.logger({
     transports: [

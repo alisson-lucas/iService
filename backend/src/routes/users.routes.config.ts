@@ -2,6 +2,7 @@ import express from "express";
 
 import { CommonRoutesConfig } from "../common/common.routes.config";
 import userController from "../controllers/user.controller";
+import { requireJwtMiddleware } from "../middleware/jwt.middleware";
 
 export class UsersRoutes extends CommonRoutesConfig {
     constructor(app: express.Application) {
@@ -10,7 +11,7 @@ export class UsersRoutes extends CommonRoutesConfig {
 
     configureRoutes(): express.Application {
         this.app.route(this.route.concat("/find"))
-            .post(userController.find);
+            .post(requireJwtMiddleware, userController.find);
         this.app.route(this.route.concat("/register"))
             .post(userController.register)
         this.app.route(this.route.concat("/login"))
