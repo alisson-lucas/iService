@@ -10,7 +10,7 @@ import { Container, ScrollContainer, Text, TextInput, SelectView, FormButton, Te
 export default function UserSignIn(){
   const [isProfessional, setIsProfessional] = useState(false);
   const [radioValue, setRadioValue] = useState('');
-  const [profession, setProfession] = useState('');
+  const [profession, setProfession] = useState(['']);
   const [professionChoosed, setProfessionChoosed] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -39,7 +39,7 @@ export default function UserSignIn(){
       cpf,
       phone,
       gender,
-      profession
+      occupation:profession
     }
 
     console.log("objeto enviado = {}",postData);
@@ -53,8 +53,8 @@ export default function UserSignIn(){
         setCpf('')
         setPhone('')
         setGender('')
-        setProfession('')
-        console.log(response);
+        setProfession([''])
+        console.log(response)
       }
 
     ).catch(error => {
@@ -77,12 +77,14 @@ export default function UserSignIn(){
           formHorizontal={true}
           buttonColor={'#000080'}
           onPress={(value) => {
-              if(value === 'Profissional'){
+              if(value === 'PROFISSIONAL'){
                 setRadioValue(value)
                 setIsProfessional(true)
+                console.log("valor do radio = ", value)
               } else {
                 setRadioValue(value)
                 setIsProfessional(false)
+                console.log("valor do radio = ", value)
               }
             }
           }
@@ -101,8 +103,8 @@ export default function UserSignIn(){
                   onValueChange={(value) => setGender(value)}
 
                   items={[
-                  { label: 'Masculino', value: 'Masculino', color: '#000' },
-                  { label: 'Feminino', value: 'Feminino', color: '#000' },
+                  { label: 'Masculino', value: 'M', color: '#000' },
+                  { label: 'Feminino', value: 'F', color: '#000' },
                   ]}
 
                   style={{ inputAndroid: { color: '#000' }, inputIOS: { color: '#000' } }}
@@ -110,7 +112,7 @@ export default function UserSignIn(){
                   placeholder={{ label: 'Gênero', value: ''}}
                   />
               </SelectView>
-              <TextInput placeholder="Profissão"  onChangeText={value => setProfession(value)}></TextInput>
+              <TextInput placeholder="Profissão"  onChangeText={value => setProfession([value])}></TextInput>
             </> : <></>
           }
           
