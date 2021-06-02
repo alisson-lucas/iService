@@ -6,15 +6,17 @@ import { Container, FormContainer, LogoImage, Text, TextInput, FormButton, TextB
 import Logo from '../../../assets/images/misc/iservice-logo.png';
 import { UserController } from '../../controllers/user.controller';
 
-function Login() {
+const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     
+    const navigation = useNavigation();
+
     const handleNavigateUserSignScreen = () => {
-        useNavigation().navigate('UserSignIn');
+        navigation.navigate('UserSignIn');
     };
 
-    function doLogin() {
+    const doLogin = () => {
         UserController.login({
             username,
             password
