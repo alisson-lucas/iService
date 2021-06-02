@@ -3,7 +3,7 @@ import { View, Alert, Platform } from 'react-native';
 import RNPickerSelector from 'react-native-picker-select';
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 
-import { apiProfissoes, api } from '../../services/api';
+import { apiProfissoes, API } from '../../services/api';
 
 import { Container, ScrollContainer, Text, TextInput, SelectView, FormButton, TextButton } from './styles';
 
@@ -43,7 +43,7 @@ export default function UserSignIn(){
     }
 
     console.log("objeto enviado = {}",postData);
-    api.post('users/register', postData).then(
+    API.post('users/register', postData).then(
       response => {
         setRadioValue('')
         setEmail('')
