@@ -3,29 +3,68 @@ import { View, Alert, Platform } from 'react-native';
 import RNPickerSelector from 'react-native-picker-select';
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 
-import { apiProfissoes } from '../../services/api';
+import { apiProfissoes, api } from '../../services/api';
 
 import { Container, ScrollContainer, Text, TextInput, SelectView, FormButton, TextButton } from './styles';
 
 export default function UserSignIn(){
-  const [type, setType] = useState('');
   const [isProfessional, setIsProfessional] = useState(false);
   const [radioValue, setRadioValue] = useState('');
-  const [profission, setProfission] = useState('');
+  const [profession, setProfession] = useState('');
   const [professionChoosed, setProfessionChoosed] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [repeatPassword, setRepeatPassword] = useState('');
+  const [name, setName] = useState('');
+  const [cpf, setCpf] = useState('');
+  const [phone, setPhone] = useState('');
+  const [gender, setGender] = useState('');
 
   useEffect(() => {
-    apiProfissoes.get(`v1?callback=CALLBACK_JSONP&s=${setProfission}`).then(
+    apiProfissoes.get(`v1?callback=CALLBACK_JSONP&s=${setProfession}`).then(
       response => {
         // setProfessionChoosed(response.data)
         // console.log(response.request)
       }
     )
-  },[profission]);
+  },[profession]);
+
+  function signUser(){
+    const postData = {
+      type:radioValue,
+      username:email,
+      password,
+      repeat_password:repeatPassword,
+      name,
+      cpf,
+      phone,
+      gender,
+      profession
+    }
+
+    console.log("objeto enviado = {}",postData);
+    api.post('users/register', postData).then(
+      response => {
+        setRadioValue('')
+        setEmail('')
+        setPassword('')
+        setRepeatPassword('')
+        setName('')
+        setCpf('')
+        setPhone('')
+        setGender('')
+        setProfession('')
+        console.log(response);
+      }
+
+    ).catch(error => {
+      console.log("erro={}",error);
+    })
+  };
 
   var profissoes = [
-    {label: 'Cliente', value: 'Cliente' },
-    {label: 'Profissional', value: 'Profissional' }
+    {label: 'Cliente', value: 'CLIENTE' },
+    {label: 'Profissional', value: 'PROFISSIONAL' }
   ];
 
   return (
@@ -48,18 +87,18 @@ export default function UserSignIn(){
             }
           }
           />
-          <TextInput placeholder="Email"></TextInput>
-          <TextInput placeholder="Senha"></TextInput>
-          <TextInput placeholder="Repetir senha"></TextInput>
-          <TextInput placeholder="Nome"></TextInput>
-          <TextInput placeholder="Cpf"></TextInput>
+          <TextInput placeholder="Email" onChangeText={value => setEmail(value)}></TextInput>
+          <TextInput placeholder="Senha" onChangeText={value => setPassword(value)}></TextInput>
+          <TextInput placeholder="Repetir senha" onChangeText={value => setRepeatPassword(value)}></TextInput>
+          <TextInput placeholder="Nome" onChangeText={value => setName(value)}></TextInput>
+          <TextInput placeholder="Cpf" onChangeText={value => setCpf(value)}></TextInput>
           {isProfessional ? 
             <>
-              <TextInput placeholder="Telefone" keyboardType="numeric"></TextInput>
+              <TextInput placeholder="Telefone" keyboardType="numeric" onChangeText={value => setPhone(value)}></TextInput>
               <SelectView>
               <RNPickerSelector
 
-                  onValueChange={(value) => setType(value)}
+                  onValueChange={(value) => setGender(value)}
 
                   items={[
                   { label: 'Masculino', value: 'Masculino', color: '#000' },
@@ -71,12 +110,12 @@ export default function UserSignIn(){
                   placeholder={{ label: 'Gênero', value: ''}}
                   />
               </SelectView>
-              <TextInput placeholder="Profissão"  onChangeText={value => setProfission(value)}></TextInput>
+              <TextInput placeholder="Profissão"  onChangeText={value => setProfession(value)}></TextInput>
             </> : <></>
           }
           
 
-          <FormButton>
+          <FormButton onPress={signUser}>
               <TextButton>Cadastrar</TextButton>
           </FormButton>
       </Container>

@@ -1,7 +1,7 @@
 import Axios from 'axios';
 
 export const api = Axios.create({
-  baseURL: 'http://10.0.0.103:3333/'
+  baseURL: 'http://192.168.1.106:3000/'
 });
 
 export const apiProfissoes = Axios.create({
