@@ -1,128 +1,86 @@
-import React,{useState, useEffect} from 'react';
-import { View, Alert, Platform } from 'react-native';
-import RNPickerSelector from 'react-native-picker-select';
-import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
+import React, { useState } from 'react';
+import { ISPickerGroup } from '../../components/iService/ISPickerGroup';
+import { ISRadioGroup } from '../../components/iService/ISRadioGroup';
 
-import { apiProfissoes, API } from '../../services/api';
+import { ISTextInput } from '../../components/iService/ISTextInput';
 
-import { Container, ScrollContainer, Text, TextInput, SelectView, FormButton, TextButton } from './styles';
+import { UserController } from '../../controllers/user.controller';
 
-export default function UserSignIn(){
-  const [isProfessional, setIsProfessional] = useState(false);
-  const [radioValue, setRadioValue] = useState('');
-  const [profession, setProfession] = useState(['']);
-  const [professionChoosed, setProfessionChoosed] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [repeatPassword, setRepeatPassword] = useState('');
-  const [name, setName] = useState('');
-  const [cpf, setCpf] = useState('');
-  const [phone, setPhone] = useState('');
-  const [gender, setGender] = useState('');
+import { Container, ScrollContainer, Text, TextInput, FormButton, TextButton } from './styles';
 
-  useEffect(() => {
-    apiProfissoes.get(`v1?callback=CALLBACK_JSONP&s=${setProfession}`).then(
-      response => {
-        // setProfessionChoosed(response.data)
-        // console.log(response.request)
-      }
-    )
-  },[profession]);
+const userTypes = [
+  { label: "Cliente", value: "CLIENTE" },
+  { label: "Profissional", value: "PROFISSIONAL" }
+];
 
-  function signUser(){
-    const postData = {
-      type:radioValue,
-      username:email,
+const userGender = [
+  { label: 'Masculino', value: 'M' },
+  { label: 'Feminino', value: 'F' },
+];
+
+const UserSignIn = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [repeat_password, setRepeatPassword] = useState("");
+  const [type, setType] = useState("");
+  const [name, setName] = useState("");
+  const [cpf, setCpf] = useState("");
+  const [address, setAddress] = useState("");
+  const [phone, setPhone] = useState("");  
+  const [gender, setGender] = useState("M");
+  const [description, setDescription] = useState("");
+  const [occupation, setOcuppation] = useState([]);
+
+  const [errorUsername, setErrorUsername] = useState(null);
+  
+
+  const signUser = () => {
+    const newUser = {
+      username,
       password,
-      repeat_password:repeatPassword,
+      repeat_password,
+      type,
       name,
       cpf,
+      address,
       phone,
       gender,
-      occupation:profession
-    }
-
-    console.log("objeto enviado = {}",postData);
-    API.post('users/register', postData).then(
-      response => {
-        setRadioValue('')
-        setEmail('')
-        setPassword('')
-        setRepeatPassword('')
-        setName('')
-        setCpf('')
-        setPhone('')
-        setGender('')
-        setProfession([''])
-        console.log(response)
-      }
-
-    ).catch(error => {
-      console.log("erro={}",error);
-    })
+      description,
+      occupation
+    };
+    
+    //UserController.register(newUser).then((response) => {
+      setErrorUsername("Mensagem de error");
+    //})
   };
-
-  var profissoes = [
-    {label: 'Cliente', value: 'CLIENTE' },
-    {label: 'Profissional', value: 'PROFISSIONAL' }
-  ];
 
   return (
     <ScrollContainer>
-      <Container behavior={Platform.OS == 'ios' ? 'padding' : 'height'}>
+      <Container>
           <Text>Insira seus dados para concluir o cadastro</Text>
-          <RadioForm 
-          radio_props={profissoes}
-          initial={0}
-          formHorizontal={true}
-          buttonColor={'#000080'}
-          onPress={(value) => {
-              if(value === 'PROFISSIONAL'){
-                setRadioValue(value)
-                setIsProfessional(true)
-                console.log("valor do radio = ", value)
-              } else {
-                setRadioValue(value)
-                setIsProfessional(false)
-                console.log("valor do radio = ", value)
-              }
-            }
-          }
-          />
-          <TextInput placeholder="Email" onChangeText={value => setEmail(value)}></TextInput>
-          <TextInput placeholder="Senha" onChangeText={value => setPassword(value)}></TextInput>
-          <TextInput placeholder="Repetir senha" onChangeText={value => setRepeatPassword(value)}></TextInput>
-          <TextInput placeholder="Nome" onChangeText={value => setName(value)}></TextInput>
-          <TextInput placeholder="Cpf" onChangeText={value => setCpf(value)}></TextInput>
-          {isProfessional ? 
+          <ISRadioGroup options={userTypes} formHorizontal={true} onPress={(value: string) => setType(value)} />
+          <ISTextInput label={"Username"} error={errorUsername} placeholder={"Email"} value={username} onChangeText={(value: string) => setUsername(value)} />
+          <ISTextInput label={"Senha"} placeholder={"Senha"} value={password} onChangeText={(value: string) => setPassword(value)} secureTextEntry={true} />
+          <ISTextInput label={"Repetir Senha"} placeholder={"Repetir senha"} value={repeat_password} onChangeText={(value: string) => setRepeatPassword(value)} secureTextEntry={true} />
+          <ISTextInput label={"Nome"} placeholder={"Nome"} value={name} onChangeText={(value: string) => setName(value)} />
+          <ISTextInput label={"Cpf"} placeholder={"CPF"} value={cpf} onChangeText={(value: string) => setCpf(value)} keyboardType={"numeric"} />
+
+          {type == "PROFISSIONAL" && 
             <>
-              <TextInput placeholder="Telefone" keyboardType="numeric" onChangeText={value => setPhone(value)}></TextInput>
-              <SelectView>
-              <RNPickerSelector
-
-                  onValueChange={(value) => setGender(value)}
-
-                  items={[
-                  { label: 'Masculino', value: 'M', color: '#000' },
-                  { label: 'Feminino', value: 'F', color: '#000' },
-                  ]}
-
-                  style={{ inputAndroid: { color: '#000' }, inputIOS: { color: '#000' } }}
-
-                  placeholder={{ label: 'Gênero', value: ''}}
-                  />
-              </SelectView>
-              <TextInput placeholder="Profissão"  onChangeText={value => setProfession([value])}></TextInput>
-            </> : <></>
+              <ISPickerGroup label={"Genero"} options={userGender} onValueChange={(value: string, i: any) => setGender(value)} />
+              <ISTextInput label={"Endereco"} placeholder={"Endereco"} value={address} onChangeText={(value: string) => setAddress(value)}/>
+              <ISTextInput label={"Telefone"} placeholder={"Telefone"} value={phone} onChangeText={(value: string) => setPhone(value)} keyboardType={"numeric"} />
+              <ISTextInput label={"Sobre"} placeholder={"Fale um pouco sobre suas funcoes"} value={description} onChangeText={(value: string) => setDescription(value)} multiline={true} />
+            </> 
           }
           
 
-          <FormButton onPress={signUser}>
-              <TextButton>Cadastrar</TextButton>
+          <FormButton >
+              <TextButton onPress={signUser}>Cadastrar</TextButton>
           </FormButton>
       </Container>
     </ScrollContainer>
   );
-}
+};
 
-;
+export default UserSignIn;

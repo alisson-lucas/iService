@@ -17,10 +17,12 @@ const Login = () => {
     };
 
     const doLogin = () => {
-        UserController.login({
+        const loginRequest = {
             username,
             password
-        });
+        };
+        
+        UserController.login(loginRequest);
     }
 
   return (
