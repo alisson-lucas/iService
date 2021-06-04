@@ -6,15 +6,15 @@ import blueVersion from '../../styles/colors';
 export const ISTextInput = ({
     label,
     value,
-    error,
+    errorMessage,
     ...props
 }:any) => {
 
     return (
         <View style={styles.base}>
-            {!!value && <Text style={error? styles.labelTextError : styles.labelText}>{label}</Text>}
-            <TextInput style={error ? styles.inputError : styles.input} {...props} />
-            {error && <Text style={styles.error}>{error}</Text>} 
+            {!!value && <Text style={errorMessage? styles.labelTextError : styles.labelText}>{label}</Text>}
+            <TextInput style={errorMessage ? styles.inputError : styles.input} {...props} />
+            {errorMessage && <Text style={styles.error}>{errorMessage}</Text>} 
         </View>
     );
 };
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     },
     labelText: {
         paddingHorizontal: 5,
-        fontSize: 16,
+        fontSize: 14,
         color: blueVersion.lightGray
     },
     labelTextError: {
@@ -38,12 +38,19 @@ const styles = StyleSheet.create({
     input: {
         fontSize: 14,
         paddingHorizontal: 5,
+        //borderBottomWidth: 1,
         borderBottomWidth: 1,
+        borderRightWidth: 1,
+        borderBottomRightRadius: 5,
+        //
         borderColor: blueVersion.lightGray,
     },
     inputError: {
         paddingHorizontal: 5,
-        borderBottomWidth: 1,
+        //borderBottomWidth: 1,
+        borderWidth: 1,
+        borderRadius: 5,
+        //
         borderColor: blueVersion.secondary,
         color: blueVersion.secondary,
     },

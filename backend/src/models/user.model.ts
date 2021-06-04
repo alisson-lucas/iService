@@ -69,7 +69,7 @@ export function UserFactory(sequelize: Sequelize): UserStatic {
             type: DataTypes.STRING
         },
         phone: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
         },
         gender: {
             type: DataTypes.ENUM("M", "F")

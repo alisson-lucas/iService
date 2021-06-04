@@ -5,6 +5,7 @@ import { Container, FormContainer, LogoImage, Text, TextInput, FormButton, TextB
 
 import Logo from '../../../assets/images/misc/iservice-logo.png';
 import { UserController } from '../../controllers/user.controller';
+import { ISCheckboxGroup } from '../../components/iService/ISCheckboxGroup';
 
 const Login = () => {
     const [username, setUsername] = useState("");

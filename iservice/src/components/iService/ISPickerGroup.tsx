@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native'
 import { Picker } from '@react-native-picker/picker';
+
 import blueVersion from '../../styles/colors';
 
 export const ISPickerGroup = ({
@@ -12,14 +13,15 @@ export const ISPickerGroup = ({
    return (
       <View style={styles.base}>
          <Text style={styles.labelText}>{label}</Text>
-         <Picker style={styles.picker} {...props}>
-         {
-            options.map((obj: any, i: any) => (
-               <Picker.Item key={i} label={obj.label} value={obj.value} />
-            ))
-         }
-         </Picker>
-         <View style={styles.horizontalLine} />
+         <View style={styles.pickerView}>
+            <Picker style={styles.picker}  {...props}>
+            {
+               options.map((obj: any, i: any) => (
+                  <Picker.Item key={i} label={obj.label} value={obj.value} />
+               ))
+            }
+            </Picker>
+         </View>
       </View>
    );
 };
@@ -34,16 +36,18 @@ const styles = StyleSheet.create({
    picker: {
       width: '100%',
       height: '100%',
-      borderBottomWidth: 1,
    },
    labelText: {
       paddingHorizontal: 5,
       paddingVertical: 2,
-      fontSize: 16,
-      color: blueVersion.lightGray
+      fontSize: 14,
+      color: blueVersion.lightGray,
    },
-   horizontalLine: {
-      borderBottomColor: blueVersion.lightGray,
-      borderBottomWidth: 1,
+   pickerView: {
+      borderRightWidth: 1, 
+      borderBottomWidth: 1, 
+      borderBottomRightRadius: 5,
+      paddingBottom: 10,
+      borderColor: blueVersion.lightGray,
    }
 });
