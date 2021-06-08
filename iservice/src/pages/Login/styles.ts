@@ -8,6 +8,7 @@ export const FormContainer = styled.View`
     flex: 1;
     align-items: center;
     justify-content: center;
+    padding: 0px 35px;
 `;
 
 export const LogoImage = styled.Image`
@@ -19,13 +20,19 @@ export const Text = styled.Text`
     font-size: 15px;
 `;
 
-export const TextInput = styled.TextInput`
-    width: 223px;
-    height: 49px;
-    border-radius: 50px;
+export const Input = styled.TextInput`
+    width: 100%;
+    /* height: 49px; */
+    /* border-radius: 50px; */
     background-color: #EDEDED;
     margin-top: 22px;
-    padding-left: 90px;
+    text-align: center;
+    font-size: 14px;
+
+  
+   
+    
+        
 `;
 
 export const FormButton = styled.TouchableOpacity`
@@ -56,5 +63,10 @@ export const TextBottom = styled.Text`
 
 export const BtnSign = styled.TouchableOpacity`
     margin-top: 13px;
+`;
+
+export const TextInputBold = styled.Text`
+    font-weight: bold;
+    font-size: 12px;
 `;
 

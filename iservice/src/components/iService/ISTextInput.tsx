@@ -13,7 +13,7 @@ export const ISTextInput = ({
     return (
         <View style={styles.base}>
             {!!value && <Text style={errorMessage? styles.labelTextError : styles.labelText}>{label}</Text>}
-            <TextInput style={errorMessage ? styles.inputError : styles.input} {...props} />
+            <TextInput style={styles.input} {...props} />
             {errorMessage && <Text style={styles.error}>{errorMessage}</Text>} 
         </View>
     );

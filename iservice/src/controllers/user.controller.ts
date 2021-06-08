@@ -23,12 +23,12 @@ export abstract class UserController {
 
         return API.post(this.DEFAULT_ROUTE.concat("/register"), newUser)
             .then(response => {
-                console.log("Response =", response.data);
+                console.log("Response sem erro =", response.data);
                 dataReturn.data = response.data;
                 return dataReturn;
             })
             .catch(error => {
-                console.log("Response =", error.response.data.message);
+                console.log("Response com erro=", error.response.data.message);
                 dataReturn.error = this.mapError(error.response.data.message);
                 return dataReturn;
             });

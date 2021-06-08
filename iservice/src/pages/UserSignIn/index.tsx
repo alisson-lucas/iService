@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { ISCheckboxGroup } from '../../components/iService/ISCheckboxGroup';
-
+import { useNavigation } from '@react-navigation/native';
 import { ISPickerGroup } from '../../components/iService/ISPickerGroup';
 import { ISRadioGroup } from '../../components/iService/ISRadioGroup';
 import { ISTextInput } from '../../components/iService/ISTextInput';
 import { UserController } from '../../controllers/user.controller';
-import { Container, ScrollContainer, Text, TextInput, FormButton, TextButton } from './styles';
+import { Container, ScrollContainer, Text, FormButton, TextButton } from './styles';
 
 const initialErrorsState: { [key: string]: string | null } = {
   username: null,
@@ -16,15 +16,6 @@ const initialErrorsState: { [key: string]: string | null } = {
   phone: null,
   description: null,
   occupation: null,
-};
-
-const setError = (field:string, message: string | null) => {
-  errors[field] = message;
-};
-
-const clearError = (field: string) => {
-  setError(field, null);
-  console.log(errors);
 };
 
 const userTypes = [
@@ -43,7 +34,9 @@ const userProfessions = [
   { label: "Eletricista", disabled: false },
 ];
 
+
 const UserSignIn = () => {
+  const navigation = useNavigation();
   const [username, setUsername] = useState<string | null>(null);
   const [password, setPassword] = useState<string | null>(null);
   const [repeat_password, setRepeatPassword] = useState<string | null>(null);
@@ -59,6 +52,7 @@ const UserSignIn = () => {
   const [errors, setError] = useState(initialErrorsState);
 
   const signUser = () => {
+    
     const newUser = {
       username,
       password,
@@ -72,13 +66,16 @@ const UserSignIn = () => {
       description,
       occupation
     };
-    console.log(newUser);
+    console.log("Tentando registrar: ", newUser);
 
     UserController.register(newUser).then((response) => {
       if (response.error) {
         setError( { ...errors, [response.error.field]: response.error.message });
-        console.log(errors);
+        console.log("Erros Mapeados", errors);
+      } else { 
+        navigation.navigate('Login');
       }
+
     });
   };
 
