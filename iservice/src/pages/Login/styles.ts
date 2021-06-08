@@ -13,6 +13,7 @@ export const FormContainer = styled.View`
 
 export const LogoImage = styled.Image`
     margin-right: 20px;
+    margin-bottom: 60px;
 `;
 
 export const Text = styled.Text`
