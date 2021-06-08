@@ -31,7 +31,7 @@ const Stack = createStackNavigator();
 
 function SearchTabs(){
   return (
-    <Tab.Navigator initialRouteName='Search' screenOptions={({ route }) => ({
+    <Tab.Navigator initialRouteName='Login' screenOptions={({ route }) => ({
       tabBarIcon: ({ focused, color, size }) => {
         let iconName;
         if (route.name === "Search") {
@@ -48,7 +48,7 @@ function SearchTabs(){
         },
         activeTintColor:'#000080'}}
       >
-        <Tab.Screen name="Login" component={LoginScreen} />
+        {/* <Tab.Screen name="Login" component={LoginScreen} /> */}
         <Tab.Screen name="Search" component={SearchScreen} />
         <Tab.Screen name="Profile" component={ProfileScreen} />
       </Tab.Navigator>
@@ -57,7 +57,8 @@ function SearchTabs(){
 
 export default function Navigation() {
     return (
-        <Stack.Navigator>
+        <Stack.Navigator initialRouteName='Login'>
+          <Stack.Screen name="Login" component={LoginScreen} options={{headerShown:false}}/>
           <Stack.Screen name="Search" component={SearchTabs} options={{headerShown:false}}/>
           <Stack.Screen name="Detail" component={DetailScreen} options={{headerShown:false}}/>
           <Stack.Screen name="Favorite" component={FavoriteScreen} />

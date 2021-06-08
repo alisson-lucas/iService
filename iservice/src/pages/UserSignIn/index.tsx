@@ -1,6 +1,7 @@
 import React,{useState, useEffect} from 'react';
 import { View, Alert, Platform } from 'react-native';
 import RNPickerSelector from 'react-native-picker-select';
+import { useNavigation } from '@react-navigation/native';
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 
 import { apiProfissoes, API } from '../../services/api';
@@ -9,7 +10,7 @@ import { Container, ScrollContainer, Text, TextInput, SelectView, FormButton, Te
 
 export default function UserSignIn(){
   const [isProfessional, setIsProfessional] = useState(false);
-  const [radioValue, setRadioValue] = useState('');
+  const [radioValue, setRadioValue] = useState('CLIENTE');
   const [profession, setProfession] = useState(['']);
   const [professionChoosed, setProfessionChoosed] = useState('');
   const [email, setEmail] = useState('');
@@ -19,6 +20,8 @@ export default function UserSignIn(){
   const [cpf, setCpf] = useState('');
   const [phone, setPhone] = useState('');
   const [gender, setGender] = useState('');
+
+  const navigation = useNavigation();
 
   useEffect(() => {
     apiProfissoes.get(`v1?callback=CALLBACK_JSONP&s=${setProfession}`).then(
@@ -55,10 +58,12 @@ export default function UserSignIn(){
         setGender('')
         setProfession([''])
         console.log(response)
+        navigation.navigate('Search');
       }
 
+
     ).catch(error => {
-      console.log("erro={}",error);
+      console.log("erro={}",error.response.data);
     })
   };
 
@@ -90,8 +95,8 @@ export default function UserSignIn(){
           }
           />
           <TextInput placeholder="Email" onChangeText={value => setEmail(value)}></TextInput>
-          <TextInput placeholder="Senha" onChangeText={value => setPassword(value)}></TextInput>
-          <TextInput placeholder="Repetir senha" onChangeText={value => setRepeatPassword(value)}></TextInput>
+          <TextInput placeholder="Senha" secureTextEntry={true} onChangeText={value => setPassword(value)}></TextInput>
+          <TextInput placeholder="Repetir senha" secureTextEntry={true} onChangeText={value => setRepeatPassword(value)}></TextInput>
           <TextInput placeholder="Nome" onChangeText={value => setName(value)}></TextInput>
           <TextInput placeholder="Cpf" onChangeText={value => setCpf(value)}></TextInput>
           {isProfessional ? 

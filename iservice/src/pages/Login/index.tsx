@@ -21,6 +21,8 @@ const Login = () => {
             username,
             password
         });
+
+        navigation.navigate('Search');
     }
 
   return (
