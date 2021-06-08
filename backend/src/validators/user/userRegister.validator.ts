@@ -15,11 +15,11 @@ class UserRegisterValidator {
         type: Joi.string().valid(Type.CLIENTE, Type.PROFISSIONAL).required(),
         name: Joi.string().required(),
         cpf: Joi.string().pattern(this.cpfRegex).required(),
-        address: Joi.string(),
-        phone: Joi.string(),
-        gender: Joi.string().valid(Gender.MASCULINO, Gender.FEMININO),
-        description: Joi.string(),
-        occupation: Joi.array().items(Joi.string())
+        address: Joi.string().allow(null),
+        phone: Joi.string().allow(null),
+        gender: Joi.string().valid(Gender.MASCULINO, Gender.FEMININO).allow(null),
+        description: Joi.string().allow(null),
+        occupation: Joi.array().items(Joi.string()).allow(null)
     });
 
     public validate(userRegister: UserRegister) : Joi.ValidationError | undefined {

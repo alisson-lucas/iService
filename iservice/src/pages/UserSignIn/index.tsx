@@ -1,87 +1,110 @@
-import React,{useState, useEffect} from 'react';
-import { View, Alert, Platform } from 'react-native';
-import RNPickerSelector from 'react-native-picker-select';
-import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
+import React, { useState } from 'react';
+import { ISCheckboxGroup } from '../../components/iService/ISCheckboxGroup';
+import { useNavigation } from '@react-navigation/native';
+import { ISPickerGroup } from '../../components/iService/ISPickerGroup';
+import { ISRadioGroup } from '../../components/iService/ISRadioGroup';
+import { ISTextInput } from '../../components/iService/ISTextInput';
+import { UserController } from '../../controllers/user.controller';
+import { Container, ScrollContainer, Text, FormButton, TextButton } from './styles';
 
-import { apiProfissoes } from '../../services/api';
+const initialErrorsState: { [key: string]: string | null } = {
+  username: null,
+  password: null,
+  name: null,
+  cpf: null,
+  address: null,
+  phone: null,
+  description: null,
+  occupation: null,
+};
 
-import { Container, ScrollContainer, Text, TextInput, SelectView, FormButton, TextButton } from './styles';
+const userTypes = [
+  { label: "Cliente", value: "CLIENTE" },
+  { label: "Profissional", value: "PROFISSIONAL" }
+];
 
-export default function UserSignIn(){
-  const [type, setType] = useState('');
-  const [isProfessional, setIsProfessional] = useState(false);
-  const [radioValue, setRadioValue] = useState('');
-  const [profission, setProfission] = useState('');
-  const [professionChoosed, setProfessionChoosed] = useState('');
+const userGender = [
+  { label: "Masculino", value: "M" },
+  { label: "Feminino", value: "F" },
+];
 
-  useEffect(() => {
-    apiProfissoes.get(`v1?callback=CALLBACK_JSONP&s=${setProfission}`).then(
-      response => {
-        // setProfessionChoosed(response.data)
-        // console.log(response.request)
+const userProfessions = [
+  { label: "Encanador", disabled: false },
+  { label: "Pedreiro", disabled: false },
+  { label: "Eletricista", disabled: false },
+];
+
+
+const UserSignIn = () => {
+  const navigation = useNavigation();
+  const [username, setUsername] = useState<string | null>(null);
+  const [password, setPassword] = useState<string | null>(null);
+  const [repeat_password, setRepeatPassword] = useState<string | null>(null);
+  const [type, setType] = useState<string | null>("CLIENTE");
+  const [name, setName] = useState<string | null>(null);
+  const [cpf, setCpf] = useState<string | null>(null);
+  const [address, setAddress] = useState<string | null>(null);
+  const [phone, setPhone] = useState<string | null>(null);  
+  const [gender, setGender] = useState<string | null>("M");
+  const [description, setDescription] = useState<string | null>(null);
+  const occupation: string[] = [];
+
+  const [errors, setError] = useState(initialErrorsState);
+
+  const signUser = () => {
+    
+    const newUser = {
+      username,
+      password,
+      repeat_password,
+      type,
+      name,
+      cpf,
+      address,
+      phone,
+      gender,
+      description,
+      occupation
+    };
+    console.log("Tentando registrar: ", newUser);
+
+    UserController.register(newUser).then((response) => {
+      if (response.error) {
+        setError( { ...errors, [response.error.field]: response.error.message });
+        console.log("Erros Mapeados", errors);
+      } else { 
+        navigation.navigate('Login');
       }
-    )
-  },[profission]);
 
-  var profissoes = [
-    {label: 'Cliente', value: 'Cliente' },
-    {label: 'Profissional', value: 'Profissional' }
-  ];
+    });
+  };
 
   return (
     <ScrollContainer>
-      <Container behavior={Platform.OS == 'ios' ? 'padding' : 'height'}>
+      <Container>
           <Text>Insira seus dados para concluir o cadastro</Text>
-          <RadioForm 
-          radio_props={profissoes}
-          initial={0}
-          formHorizontal={true}
-          buttonColor={'#000080'}
-          onPress={(value) => {
-              if(value === 'Profissional'){
-                setRadioValue(value)
-                setIsProfessional(true)
-              } else {
-                setRadioValue(value)
-                setIsProfessional(false)
-              }
-            }
-          }
-          />
-          <TextInput placeholder="Email"></TextInput>
-          <TextInput placeholder="Senha"></TextInput>
-          <TextInput placeholder="Repetir senha"></TextInput>
-          <TextInput placeholder="Nome"></TextInput>
-          <TextInput placeholder="Cpf"></TextInput>
-          {isProfessional ? 
+          <ISRadioGroup options={userTypes} formHorizontal={true} onPress={(value: string) => setType(value)} />
+          <ISTextInput label={"Username"} errorMessage={errors.username} placeholder={"Email"} value={username} onChangeText={(value: string) => { setUsername(value); setError( { ...errors, username : null})}} />
+          <ISTextInput label={"Senha"} errorMessage={errors.password} placeholder={"Senha"} value={password} onChangeText={(value: string) => { setPassword(value); setError( { ...errors, password : null})}} secureTextEntry={true} />
+          <ISTextInput label={"Repetir Senha"} errorMessage={errors.password} placeholder={"Repetir senha"} value={repeat_password} onChangeText={(value: string) => setRepeatPassword(value)} secureTextEntry={true} />
+          <ISTextInput label={"Nome"} errorMessage={errors.name} placeholder={"Nome"} value={name} onChangeText={(value: string) => setName(value)} />
+          <ISTextInput label={"CPF"} errorMessage={errors.cpf} placeholder={"CPF"} value={cpf} onChangeText={(value: string) => setCpf(value)} keyboardType={"numeric"} />
+          {type == "PROFISSIONAL" && 
             <>
-              <TextInput placeholder="Telefone" keyboardType="numeric"></TextInput>
-              <SelectView>
-              <RNPickerSelector
-
-                  onValueChange={(value) => setType(value)}
-
-                  items={[
-                  { label: 'Masculino', value: 'Masculino', color: '#000' },
-                  { label: 'Feminino', value: 'Feminino', color: '#000' },
-                  ]}
-
-                  style={{ inputAndroid: { color: '#000' }, inputIOS: { color: '#000' } }}
-
-                  placeholder={{ label: 'Gênero', value: ''}}
-                  />
-              </SelectView>
-              <TextInput placeholder="Profissão"  onChangeText={value => setProfission(value)}></TextInput>
-            </> : <></>
+              <ISTextInput label={"Endereco"} errorMessage={errors.address} placeholder={"Endereco"} value={address} onChangeText={(value: string) => setAddress(value)}/>
+              <ISTextInput label={"Telefone"} errorMessage={errors.phone} placeholder={"Telefone"} value={phone} onChangeText={(value: string) => setPhone(value)} keyboardType={"numeric"} />
+              <ISTextInput label={"Sobre"} errorMessage={errors.description} placeholder={"Fale um pouco sobre suas funcoes"} value={description} onChangeText={(value: string) => setDescription(value)} multiline={true} />
+              <ISPickerGroup label={"Genero"} options={userGender} onValueChange={(value: string, i: any) => setGender(value)} />
+              <ISCheckboxGroup label={"Profissoes"} errorMessage={errors.occupation} options={userProfessions} selectedOptions={occupation}/>
+            </> 
           }
           
-
-          <FormButton>
-              <TextButton>Cadastrar</TextButton>
+          <FormButton >
+              <TextButton onPress={signUser}>Cadastrar</TextButton>
           </FormButton>
       </Container>
     </ScrollContainer>
   );
-}
+};
 
-;
+export default UserSignIn;

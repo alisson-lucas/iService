@@ -47,6 +47,7 @@ class UserService {
             .then(userFound => {
                 if (userFound && userFound.correctPassword(userLogin.password)) {
                     return {
+                        data: userFound,
                         status: StatusCodes.OK,
                         message: "User authenticated with sucess"
                     };
