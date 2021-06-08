@@ -6,6 +6,9 @@ import { ISRadioGroup } from '../../components/iService/ISRadioGroup';
 import { ISTextInput } from '../../components/iService/ISTextInput';
 import { UserController } from '../../controllers/user.controller';
 import { Container, ScrollContainer, Text, FormButton, TextButton } from './styles';
+import { StyleSheet } from 'react-native'
+import { TextInputMask } from 'react-native-masked-text'
+import blueVersion from '../../styles/colors';
 
 const initialErrorsState: { [key: string]: string | null } = {
   username: null,
@@ -42,9 +45,9 @@ const UserSignIn = () => {
   const [repeat_password, setRepeatPassword] = useState<string | null>(null);
   const [type, setType] = useState<string | null>("CLIENTE");
   const [name, setName] = useState<string | null>(null);
-  const [cpf, setCpf] = useState<string | null>(null);
+  const [cpf, setCpf] = useState<string>('');
   const [address, setAddress] = useState<string | null>(null);
-  const [phone, setPhone] = useState<string | null>(null);  
+  const [phone, setPhone] = useState<string>('');  
   const [gender, setGender] = useState<string | null>("M");
   const [description, setDescription] = useState<string | null>(null);
   const occupation: string[] = [];
@@ -88,14 +91,16 @@ const UserSignIn = () => {
           <ISTextInput label={"Senha"} errorMessage={errors.password} placeholder={"Senha"} value={password} onChangeText={(value: string) => { setPassword(value); setError( { ...errors, password : null})}} secureTextEntry={true} />
           <ISTextInput label={"Repetir Senha"} errorMessage={errors.password} placeholder={"Repetir senha"} value={repeat_password} onChangeText={(value: string) => setRepeatPassword(value)} secureTextEntry={true} />
           <ISTextInput label={"Nome"} errorMessage={errors.name} placeholder={"Nome"} value={name} onChangeText={(value: string) => setName(value)} />
-          <ISTextInput label={"CPF"} errorMessage={errors.cpf} placeholder={"CPF"} value={cpf} onChangeText={(value: string) => setCpf(value)} keyboardType={"numeric"} />
+          {/* <ISTextInput label={"CPF"} errorMessage={errors.cpf} placeholder={"CPF"} value={cpf} onChangeText={(value: string) => setCpf(value)} keyboardType={"numeric"} /> */}
+          <TextInputMask style={styles.input} placeholder={'CPF'} type={'cpf'} value={cpf} onChangeText={(value: string) => setCpf(value)} />
           {type == "PROFISSIONAL" && 
             <>
               <ISTextInput label={"Endereco"} errorMessage={errors.address} placeholder={"Endereco"} value={address} onChangeText={(value: string) => setAddress(value)}/>
-              <ISTextInput label={"Telefone"} errorMessage={errors.phone} placeholder={"Telefone"} value={phone} onChangeText={(value: string) => setPhone(value)} keyboardType={"numeric"} />
+              {/* <ISTextInput label={"Telefone"} errorMessage={errors.phone} placeholder={"Telefone"} value={phone} onChangeText={(value: string) => setPhone(value)} keyboardType={"numeric"} /> */}
+              <TextInputMask style={styles.input} placeholder={'Telefone'} type={'cel-phone'} value={phone} onChangeText={(value: string) => setPhone(value)} keyboardType={"numeric"} />
               <ISTextInput label={"Sobre"} errorMessage={errors.description} placeholder={"Fale um pouco sobre suas funcoes"} value={description} onChangeText={(value: string) => setDescription(value)} multiline={true} />
               <ISPickerGroup label={"Genero"} options={userGender} onValueChange={(value: string, i: any) => setGender(value)} />
-              <ISCheckboxGroup label={"Profissoes"} errorMessage={errors.occupation} options={userProfessions} selectedOptions={occupation}/>
+              {/* <ISCheckboxGroup label={"Profissoes"} errorMessage={errors.occupation} options={userProfessions} selectedOptions={occupation}/> */}
             </> 
           }
           
@@ -106,5 +111,20 @@ const UserSignIn = () => {
     </ScrollContainer>
   );
 };
+
+const styles = StyleSheet.create({
+  input: {
+    fontSize: 14,
+    paddingHorizontal: 5,
+    // borderBottomWidth: 1,
+    borderBottomWidth: 1,
+    borderRightWidth: 1,
+    borderBottomRightRadius: 5,
+    width: '80%',
+    marginBottom: 15,
+    //
+    borderColor: blueVersion.lightGray,
+},
+})
 
 export default UserSignIn;

@@ -17,17 +17,6 @@ import { Header } from 'react-native/Libraries/NewAppScreen';
 const Tab = createBottomTabNavigator();
 
 const Stack = createStackNavigator();
-// const icons = {
-//   Search: {
-//       lib: Foundation,
-//       name: 'map'
-//   },
-//   Profile: {
-//       lib: Feather,
-//       name: 'user'
-//   },
-  
-// }
 
 function SearchTabs(){
   return (
@@ -48,7 +37,6 @@ function SearchTabs(){
         },
         activeTintColor:'#000080'}}
       >
-        {/* <Tab.Screen name="Login" component={LoginScreen} />   */}
         <Tab.Screen name="Search" component={SearchScreen} />
         <Tab.Screen name="Profile" component={ProfileScreen} />
       </Tab.Navigator>
@@ -56,13 +44,13 @@ function SearchTabs(){
 }
 
 export default function Navigation() {
-    return (
-        <Stack.Navigator initialRouteName='Login'>
-          <Stack.Screen name="Login" component={LoginScreen} options={{headerShown:false}}/>
-          <Stack.Screen name="Search" component={SearchTabs} options={{headerShown:false}}/>
-          <Stack.Screen name="Detail" component={DetailScreen} options={{headerShown:false}}/>
-          <Stack.Screen name="Favorite" component={FavoriteScreen} />
-          <Stack.Screen name="UserSignIn" component={UserSignScreen} options={{headerShown:false}}/>
-        </Stack.Navigator>
-    );
+  return (
+    <Stack.Navigator initialRouteName='Login'>
+      <Stack.Screen name="Login" component={LoginScreen} options={{headerShown:false}}/>
+      <Stack.Screen name="Search" component={SearchTabs} options={{headerShown:false}}/>
+      <Stack.Screen name="Detail" component={DetailScreen} options={{headerShown:false}}/>
+      <Stack.Screen name="Favorite" component={FavoriteScreen} />
+      <Stack.Screen name="UserSignIn" component={UserSignScreen} options={{headerShown:false}}/>
+    </Stack.Navigator>
+  );
 }
