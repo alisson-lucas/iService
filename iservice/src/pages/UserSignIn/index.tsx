@@ -7,8 +7,9 @@ import { ISTextInput } from '../../components/iService/ISTextInput';
 import { UserController } from '../../controllers/user.controller';
 import { Container, ScrollContainer, Text, FormButton, TextButton } from './styles';
 import { StyleSheet } from 'react-native'
-import { TextInputMask } from 'react-native-masked-text'
+import { TextInputMask } from 'react-native-masked-text';
 import blueVersion from '../../styles/colors';
+import ISGooglePlacesInput from '../../components/iService/ISGooglePlacesInput';
 
 const initialErrorsState: { [key: string]: string | null } = {
   username: null,
@@ -50,12 +51,20 @@ const UserSignIn = () => {
   const [phone, setPhone] = useState<string>('');  
   const [gender, setGender] = useState<string | null>("M");
   const [description, setDescription] = useState<string | null>(null);
+  
+  const [lat, setLat] = useState<number | null>(null);
+  const [lng, setLng] = useState<number | null>(null);
+
   const occupation: string[] = [];
 
   const [errors, setError] = useState(initialErrorsState);
 
+  const setLatLng = (lat: any, lng: any) => {
+    setLat(lat);
+    setLng(lng);
+  };
+
   const signUser = () => {
-    
     const newUser = {
       username,
       password,
@@ -67,7 +76,9 @@ const UserSignIn = () => {
       phone,
       gender,
       description,
-      occupation
+      occupation,
+      lat,
+      lng
     };
     console.log("Tentando registrar: ", newUser);
 
@@ -83,7 +94,7 @@ const UserSignIn = () => {
   };
 
   return (
-    <ScrollContainer>
+    <ScrollContainer keyboardShouldPersistTaps='always'>
       <Container>
           <Text>Insira seus dados para concluir o cadastro</Text>
           <ISRadioGroup options={userTypes} formHorizontal={true} onPress={(value: string) => setType(value)} />
@@ -95,6 +106,7 @@ const UserSignIn = () => {
           <TextInputMask style={styles.input} placeholder={'CPF'} type={'cpf'} value={cpf} onChangeText={(value: string) => setCpf(value)} />
           {type == "PROFISSIONAL" && 
             <>
+              <ISGooglePlacesInput setLatLng={setLatLng}/>
               <ISTextInput label={"Endereco"} errorMessage={errors.address} placeholder={"Endereco"} value={address} onChangeText={(value: string) => setAddress(value)}/>
               {/* <ISTextInput label={"Telefone"} errorMessage={errors.phone} placeholder={"Telefone"} value={phone} onChangeText={(value: string) => setPhone(value)} keyboardType={"numeric"} /> */}
               <TextInputMask style={styles.input} placeholder={'Telefone'} type={'cel-phone'} value={phone} onChangeText={(value: string) => setPhone(value)} keyboardType={"numeric"} />
@@ -103,11 +115,10 @@ const UserSignIn = () => {
               {/* <ISCheckboxGroup label={"Profissoes"} errorMessage={errors.occupation} options={userProfessions} selectedOptions={occupation}/> */}
             </> 
           }
-          
           <FormButton >
               <TextButton onPress={signUser}>Cadastrar</TextButton>
           </FormButton>
-      </Container>
+        </Container>
     </ScrollContainer>
   );
 };
