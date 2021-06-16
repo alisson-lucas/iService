@@ -107,7 +107,7 @@ const UserSignIn = () => {
           {type == "PROFISSIONAL" && 
             <>
               <ISGooglePlacesInput setLatLng={setLatLng}/>
-              <ISTextInput label={"Endereco"} errorMessage={errors.address} placeholder={"Endereco"} value={address} onChangeText={(value: string) => setAddress(value)}/>
+              {/* <ISTextInput label={"Endereco"} errorMessage={errors.address} placeholder={"Endereco"} value={address} onChangeText={(value: string) => setAddress(value)}/> */}
               {/* <ISTextInput label={"Telefone"} errorMessage={errors.phone} placeholder={"Telefone"} value={phone} onChangeText={(value: string) => setPhone(value)} keyboardType={"numeric"} /> */}
               <TextInputMask style={styles.input} placeholder={'Telefone'} type={'cel-phone'} value={phone} onChangeText={(value: string) => setPhone(value)} keyboardType={"numeric"} />
               <ISTextInput label={"Sobre"} errorMessage={errors.description} placeholder={"Fale um pouco sobre suas funcoes"} value={description} onChangeText={(value: string) => setDescription(value)} multiline={true} />
