@@ -10,6 +10,8 @@ export default interface UserRegister {
     cpf: string,
     address?: string,
     phone?: string,
+    latitude?: string,
+    longitude?: string,
     gender?: Gender,
     description?: string,
     occupation?: string[]

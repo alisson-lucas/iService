@@ -17,6 +17,8 @@ class UserUpdateValidator {
         cpf: Joi.string().pattern(this.cpfRegex),
         address: Joi.string(),
         phone: Joi.string(),
+        latitude: Joi.string(),
+        longitude: Joi.string(),
         gender: Joi.string().valid(Gender.MASCULINO, Gender.FEMININO),
         description: Joi.string(),
         occupation: Joi.array().items(Joi.string())

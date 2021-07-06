@@ -17,6 +17,8 @@ class UserRegisterValidator {
         cpf: Joi.string().pattern(this.cpfRegex).required(),
         address: Joi.string().allow(null),
         phone: Joi.string().allow(null),
+        latitude: Joi.string().allow(null),
+        longitude: Joi.string().allow(null),
         gender: Joi.string().valid(Gender.MASCULINO, Gender.FEMININO).allow(null),
         description: Joi.string().allow(null),
         occupation: Joi.array().items(Joi.string()).allow(null)

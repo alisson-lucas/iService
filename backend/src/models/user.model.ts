@@ -14,6 +14,8 @@ export interface UserAttributes {
     cpf: string,
     address: string,
     phone: string,
+    latitude: string,
+    longitude: string,
     gender: Gender,
     description: string,
     occupation: string
@@ -69,6 +71,12 @@ export function UserFactory(sequelize: Sequelize): UserStatic {
             type: DataTypes.STRING
         },
         phone: {
+            type: DataTypes.STRING,
+        },
+        latitude: {
+            type: DataTypes.STRING,
+        },
+        longitude: {
             type: DataTypes.STRING,
         },
         gender: {
