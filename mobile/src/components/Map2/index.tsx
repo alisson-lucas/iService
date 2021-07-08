@@ -5,38 +5,43 @@ import { Container, PopupContainer, PopupTitle, PopupProvider, PopupDescription,
 import { Modalize } from 'react-native-modalize';
 import { useNavigation } from '@react-navigation/native';
 import * as Location from 'expo-location';
+import { UserController } from '../../controllers/user.controller';
 
 
 export default function Map2(){
 
-    const [initialPosition, setInitialPosition] = useState<[number, number]>([0, 0]);
-
     const navigation = useNavigation();
+    const [initialPosition, setInitialPosition] = useState<[number, number]>([0, 0]);
+    const [profissionais, setProfissionais] = useState([]); 
 
 
     function handleNavigateDetail(){
         navigation.navigate('Detail');
     };
 
-    
-    useEffect(() => {
-        async function loadPosition() {
-          const { status } = await Location.requestPermissionsAsync();
-    
-          if (status !== 'granted') {
+    async function loadPosition() {
+        const { status } = await Location.requestPermissionsAsync();
+
+        if (status !== 'granted') {
             Alert.alert('Opa, houve um problema', 'Precisamos da sua Localização');
             return;
-          }
-    
-          const location = await Location.getCurrentPositionAsync();
-          const { latitude, longitude } = location.coords;
-    
-          setInitialPosition([latitude, longitude])
         }
-        loadPosition();
-    }, [])
 
-    
+        const location = await Location.getCurrentPositionAsync();
+        const { latitude, longitude } = location.coords;
+
+        setInitialPosition([latitude, longitude]);
+    }
+
+    const getProfissionais = async () => {
+        setProfissionais(await UserController.getAllProfissionais());
+    }
+
+    useEffect(() => {
+        loadPosition();
+        getProfissionais();
+        
+    }, [])
 
     return(
         <Container>
@@ -53,23 +58,22 @@ export default function Map2(){
                             </View>
                         </Callout>
                     </Marker>
+                    {
+                        profissionais.map((profissional) => (
+                        <Marker
+                            key={profissional['id']}
+                            coordinate={
+                                {
+                                    latitude: profissional['lat'],
+                                    longitude: profissional['lng']
+                                }
+                            }
+                            title={profissional['name']}
+                            description={profissional['type']}
+                        />
+                    ))}
             </MapView>)
             }
-                {/* <Modalize ref={modalizeRef} snapPoint={200} modalHeight={200}>
-                    <PopupContainer>
-                            <PopupTitle>Personal trainner</PopupTitle>
-                            <PopupProvider>João Personal</PopupProvider>
-                            <PopupDescription>Treinos de força, funcional e aeróbico</PopupDescription>
-                            <ButtonContainer>
-                                <PopupButton>
-                                    <ButtonText>Whatsapp</ButtonText>
-                                </PopupButton>
-                                <PopupButton2>
-                                    <ButtonText>E-mail</ButtonText>
-                                </PopupButton2>
-                            </ButtonContainer>
-                    </PopupContainer>
-                </Modalize> */}
         </Container>
     );
 }

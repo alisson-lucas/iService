@@ -3,6 +3,18 @@ import { API } from './../services/api';
 export abstract class UserController {
     private static DEFAULT_ROUTE: string = "/users";
 
+    public static async getAllProfissionais()  {
+        return API.post(this.DEFAULT_ROUTE.concat("/find?type=PROFISSIONAL"))
+        .then(response => {
+            console.log("Response FIND =", response.data);
+            return response.data;
+        })
+        .catch(error => {
+            console.log("Error FIND =", error.response.data);
+            return error;
+        });
+    };
+
     public static async login(loginRequest: any) {
         return API.post(this.DEFAULT_ROUTE.concat("/login"), loginRequest)
             .then(response => {
