@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import { LogBox } from 'react-native';
+import {StyleSheet } from 'react-native';
 
 import { Input } from 'react-native-elements';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 
 const GOOGLE_PLACES_API_KEY = 'AIzaSyBSJOzsaShzBRemQ5PD8P_AL97E1AoZm4Y';
 
-console.disableYellowBox = true; //disabled yellow warning
+// console.disableYellowBox = true; //disabled yellow warning
+LogBox.ignoreAllLogs(true) //disabled yellow warning
 
 const ISGooglePlacesInput = ({
   setLatLng,
@@ -31,12 +34,31 @@ const ISGooglePlacesInput = ({
         language: 'en', // language of the results
       }}
       onPress={addressInfo}
+      enablePoweredByContainer={false}
       textInputProps={{
         InputComp: Input,
         errorStyle: { color: 'red' },
       }}
+      styles={{
+        textInputContainer : {
+          paddingLeft: 27,
+          paddingRight: 27
+        },
+        textInput: {
+          borderRightWidth: 1,
+          borderBottomWidth: 1,
+          borderBottomRightRadius: 5,
+          height: 5
+        } 
+      }}
     />
   );
 };
+
+const styles = StyleSheet.create({
+  input: {
+    width: 100
+  }
+});
 
 export default ISGooglePlacesInput;
