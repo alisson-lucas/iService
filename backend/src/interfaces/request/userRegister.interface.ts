@@ -12,5 +12,7 @@ export default interface UserRegister {
     phone?: string,
     gender?: Gender,
     description?: string,
-    occupation?: string[]
+    occupation?: string[],
+    lat?: number,
+    lng?: number,
 };

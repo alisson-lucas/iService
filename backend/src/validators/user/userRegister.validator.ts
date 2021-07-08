@@ -19,7 +19,9 @@ class UserRegisterValidator {
         phone: Joi.string().allow(null),
         gender: Joi.string().valid(Gender.MASCULINO, Gender.FEMININO).allow(null),
         description: Joi.string().allow(null),
-        occupation: Joi.array().items(Joi.string()).allow(null)
+        occupation: Joi.array().items(Joi.string()).allow(null),
+        lat: Joi.number().allow(null),
+        lng: Joi.number().allow(null)
     });
 
     public validate(userRegister: UserRegister) : Joi.ValidationError | undefined {
