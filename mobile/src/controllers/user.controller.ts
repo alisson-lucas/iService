@@ -4,9 +4,9 @@ export abstract class UserController {
     private static DEFAULT_ROUTE: string = "/users";
 
     public static async getAllProfissionais()  {
-        return API.post(this.DEFAULT_ROUTE.concat("/find?type=PROFISSIONAL"))
+        return await API.post(this.DEFAULT_ROUTE.concat("/find?type=PROFISSIONAL"))
         .then(response => {
-            console.log("Response FIND =", response.data);
+            console.log("Response FIND =", response);
             return response.data;
         })
         .catch(error => {

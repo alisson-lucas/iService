@@ -34,19 +34,29 @@ export default function Map2(){
     }
 
     const getProfissionais = async () => {
-        setProfissionais(await UserController.getAllProfissionais());
+        const response = (await UserController.getAllProfissionais()).data;
+        setProfissionais(response);
     }
 
     useEffect(() => {
         loadPosition();
         getProfissionais();
-        
     }, [])
 
     return(
         <Container>
             {initialPosition[0] != 0 && (
-            <MapView provider={PROVIDER_GOOGLE} initialRegion={{latitude:initialPosition[0], longitude:initialPosition[1], latitudeDelta: 0.004, longitudeDelta: 0.004}} style={styles.map}>
+            <MapView 
+                style={styles.map}
+                provider={PROVIDER_GOOGLE} 
+                initialRegion={
+                    {
+                        latitude:initialPosition[0], 
+                        longitude:initialPosition[1], 
+                        latitudeDelta: 0.004, 
+                        longitudeDelta: 0.004
+                    }
+                }>
                     <Marker coordinate={{latitude: -7.951833 , longitude: -34.8777377}} onPress={handleNavigateDetail}>
                     {/* <Image style={styles.icone} source={Drone} /> */}
                         <Callout >
@@ -60,18 +70,17 @@ export default function Map2(){
                     </Marker>
                     {
                         profissionais.map((profissional) => (
-                        <Marker
-                            key={profissional['id']}
-                            coordinate={
-                                {
-                                    latitude: profissional['lat'],
-                                    longitude: profissional['lng']
+                            <Marker
+                                key={profissional['id']}
+                                coordinate={
+                                    {
+                                        latitude: profissional['lat'],
+                                        longitude: profissional['lng']
+                                    }
                                 }
-                            }
-                            title={profissional['name']}
-                            description={profissional['type']}
-                        />
-                    ))}
+                            />
+                        ))
+                    }
             </MapView>)
             }
         </Container>
