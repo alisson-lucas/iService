@@ -1,26 +1,22 @@
-import React, {Component, useRef, useState, useEffect} from 'react'
+import React, { useState, useEffect} from 'react'
 import MapView, { PROVIDER_GOOGLE, Marker, Callout } from 'react-native-maps'
-import {View, StyleSheet, Text, TouchableOpacity, Alert} from 'react-native'
-import { Container, PopupContainer, PopupTitle, PopupProvider, PopupDescription, ButtonContainer, PopupButton, PopupButton2, ButtonText } from './styles';
-import { Modalize } from 'react-native-modalize';
+import { View, StyleSheet, Text, TouchableOpacity, Alert } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
 import * as Location from 'expo-location';
+
 import { UserController } from '../../controllers/user.controller';
 
-
-export default function Map2(){
-
+const ISMapView = () => {
     const navigation = useNavigation();
     const [initialPosition, setInitialPosition] = useState<[number, number]>([0, 0]);
     const [profissionais, setProfissionais] = useState([]); 
 
-
-    function handleNavigateDetail(){
-        navigation.navigate('Detail');
+    const handleNavigateDetail = (profissional: any) => {
+        navigation.navigate('Detail', profissional);
     };
 
-    async function loadPosition() {
-        const { status } = await Location.requestPermissionsAsync();
+    const loadPosition = async() => {
+        const { status } = await Location.requestBackgroundPermissionsAsync();
 
         if (status !== 'granted') {
             Alert.alert('Opa, houve um problema', 'Precisamos da sua Localização');
@@ -30,7 +26,9 @@ export default function Map2(){
         const location = await Location.getCurrentPositionAsync();
         const { latitude, longitude } = location.coords;
 
-        setInitialPosition([latitude, longitude]);
+        console.log("Actual Lat Long = ", {latitude, longitude})
+        //setInitialPosition([latitude, longitude]);
+        setInitialPosition([-7.84252, -34.9085]);
     }
 
     const getProfissionais = async () => {
@@ -44,7 +42,7 @@ export default function Map2(){
     }, [])
 
     return(
-        <Container>
+        <View style={styles.view}>
             {initialPosition[0] != 0 && (
             <MapView 
                 style={styles.map}
@@ -57,17 +55,6 @@ export default function Map2(){
                         longitudeDelta: 0.004
                     }
                 }>
-                    <Marker coordinate={{latitude: -7.951833 , longitude: -34.8777377}} onPress={handleNavigateDetail}>
-                    {/* <Image style={styles.icone} source={Drone} /> */}
-                        <Callout >
-                            <View style={styles.callout} >
-                                <Text style={styles.name}>Voo de Monitoramento de Temperatura</Text>
-                                <TouchableOpacity onPress={() => {}}>
-                                    <Text style={styles.local}>Mais informações...</Text>
-                                </TouchableOpacity>
-                            </View>
-                        </Callout>
-                    </Marker>
                     {
                         profissionais.map((profissional) => (
                             <Marker
@@ -78,16 +65,32 @@ export default function Map2(){
                                         longitude: profissional['lng']
                                     }
                                 }
-                            />
+                            >
+                                <Callout onPress={ () => handleNavigateDetail(profissional)}>
+                                    <View style={styles.callout}>
+                                        <Text style={styles.name}>{ profissional['name'] }</Text>
+                                        <TouchableOpacity>
+                                            <Text style={styles.local}>
+                                                {(profissional['occupation']).join(", ")}
+                                            </Text>
+                                        </TouchableOpacity>
+                                    </View>
+                                </Callout>
+                            </Marker>
                         ))
                     }
             </MapView>)
             }
-        </Container>
+        </View>
     );
 }
 
 const styles = StyleSheet.create({
+    view: {
+        flex: 1,
+        alignItems: 'center',
+        borderTopLeftRadius: 50,
+    },
     map: {
         width: 330,
         height: 430,
@@ -111,3 +114,5 @@ const styles = StyleSheet.create({
         marginTop: 5
     }
 });
+
+export default ISMapView;

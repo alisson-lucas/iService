@@ -1,30 +1,23 @@
 import React from 'react';
-import { View, Text, StyleSheet  } from 'react-native';
-import { Wrapper, Header, TitleContainer, LabelContainer, LabelTitle, Title, Balance,BtnContainer, BtnFavorite, BtnAvaliation, BtnText} from './styles';
+import { StyleSheet  } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-// import Map from '../../components/Map'
-import Map2 from '../../components/Map2'
 
+import MapView from '../../components/iService/ISMapView'
+import { Wrapper, LabelContainer, LabelTitle,  BtnContainer, BtnFavorite, BtnAvaliation, BtnText} from './styles';
 
-export default function Search() {
-
+const Search = () => {
     const navigation = useNavigation();
 
-    function handleNavigateFavorite(){
+    const handleNavigateFavorite = () => {
         navigation.navigate('Favorite');
     };
 
     return (
         <Wrapper>
-            {/* <Header>
-              <TitleContainer>
-                <Balance>Serviços</Balance>
-              </TitleContainer>
-            </Header> */}
             <LabelContainer>
                 <LabelTitle>Encontre o serviço que você está precisando!</LabelTitle>
             </LabelContainer>
-            <Map2 />
+            <MapView />
 
             <BtnContainer>
                 <BtnFavorite>
@@ -44,4 +37,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center'
     },
-})
+});
+
+export default Search;

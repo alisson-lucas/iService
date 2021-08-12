@@ -1,17 +1,30 @@
-import React, {Component, useRef, useState, useEffect} from 'react'
-import { useNavigation, useRoute } from '@react-navigation/native';
-import { Container, Header,BackButton,DetailContainer,ProviderImage, DetailTitle, DetailProvider, DetailDescription, ButtonContainer, DetailButton, DetailButton2, ButtonText } from './styles';
-import { Feather as Icon, FontAwesome5 } from '@expo/vector-icons'
+import React from 'react'
+import { Alert } from "react-native";
 
+import { useNavigation } from '@react-navigation/native';
+import { Feather as Icon } from '@expo/vector-icons'
+
+import { Container, Header, BackButton, DetailContainer, ProviderImage, DetailTitle, DetailProvider, DetailDescription, ButtonContainer, DetailButton, DetailButton2, ButtonText } from './styles';
 import avatar from '../../../assets/images/misc/user-avatar.png';
 
-export default function Detail(){
-    const navigation = useNavigation();
+
+const Detail = ({navigation, route}: any) => {
+    const profissional =  route.params;
+    const nav = useNavigation();
     
-    function handleBackScreen(){
-        navigation.goBack();
+    const handleBackScreen = () => {
+        nav.goBack();
     };
 
+    const handleContact = (contact: string) => {
+        Alert.alert(
+            "Contato",
+            contact,
+            [
+              { text: "OK" }
+            ]
+          );
+    }
     return (
         <Container>
             <Header>
@@ -21,18 +34,19 @@ export default function Detail(){
             </Header>
             <DetailContainer>
                 <ProviderImage source={avatar}></ProviderImage>
-                <DetailTitle>Personal trainner</DetailTitle>
-                <DetailProvider>João Personal</DetailProvider>
-                <DetailDescription>Treinos de força, funcional e aeróbico</DetailDescription>
+                <DetailTitle>{ profissional['name'] }</DetailTitle>
+                <DetailProvider>{ profissional['cpf'] }</DetailProvider>
+                <DetailDescription>{ profissional['description'] }</DetailDescription>
                 <ButtonContainer>
                     <DetailButton>
                         <ButtonText>Favoritar</ButtonText>
                     </DetailButton>
                     <DetailButton2>
-                        <ButtonText>Contato</ButtonText>
+                        <ButtonText onPress={() => { handleContact(profissional['phone'])}}>Contato</ButtonText>
                     </DetailButton2>
                 </ButtonContainer>
             </DetailContainer>
         </Container>
     );
 };
+export default Detail;

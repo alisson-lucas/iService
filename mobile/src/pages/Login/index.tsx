@@ -9,17 +9,14 @@ import { Input, Text } from 'react-native-elements';
 import { API } from '../../services/api';
 import { Icon } from 'react-native-elements/dist/icons/Icon';
 
-export default function Login(){
-
+const UserLoginScreen = () => {
     const navigation = useNavigation();
     const [email,setEmail] = useState<string | null>(null)
     const [password,setPassword] = useState<string | null>(null)
     
     
-    const  Register=() =>
-    {
-        navigation.navigate('UserSignIn');
-           
+    const Register=() => {
+        navigation.navigate('UserRegister');
     };
 
     const Login = () => 
@@ -71,4 +68,6 @@ export default function Login(){
         </FormContainer>
     </Container>
   );
-}
+};
+
+export default UserLoginScreen;

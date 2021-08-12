@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { Text, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Foundation as Icon} from '@expo/vector-icons'
@@ -9,16 +8,13 @@ import SearchScreen from './pages/Search';
 import ProfileScreen from './pages/Profile';
 import DetailScreen from './pages/Detail';
 import FavoriteScreen from './pages/Favorite';
-import LoginScreen from './pages/Login';
-import UserSignScreen from './pages/UserSignIn';
-import { Header } from 'react-native/Libraries/NewAppScreen';
-
+import UserLoginScreen from './pages/Login';
+import UserRegisterScreen from './pages/Register';
 
 const Tab = createBottomTabNavigator();
-
 const Stack = createStackNavigator();
 
-function SearchTabs(){
+const SearchTabs = () => {
   return (
     <Tab.Navigator initialRouteName='Login' screenOptions={({ route }) => ({
       tabBarIcon: ({ focused, color, size }) => {
@@ -46,11 +42,11 @@ function SearchTabs(){
 export default function Navigation() {
   return (
     <Stack.Navigator >
-      <Stack.Screen name="Login" component={LoginScreen} options={{headerShown:false}}/>
+      <Stack.Screen name="UserLogin" component={UserLoginScreen} options={{headerShown:false}}/>
       <Stack.Screen name="Search" component={SearchTabs} options={{headerShown:false}}/>
       <Stack.Screen name="Detail" component={DetailScreen} options={{headerShown:false}}/>
       <Stack.Screen name="Favorite" component={FavoriteScreen} />
-      <Stack.Screen name="UserSignIn" component={UserSignScreen} options={{headerShown:false}}/>
+      <Stack.Screen name="UserRegister" component={UserRegisterScreen} options={{headerShown:false}}/>
     </Stack.Navigator>
   );
 }
