@@ -11,6 +11,7 @@ import DetailScreen from './pages/Detail';
 import FavoriteScreen from './pages/Favorite';
 import LoginScreen from './pages/Login';
 import UserSignScreen from './pages/UserSignIn';
+import UpdateUser from './pages/updateUser';
 import { Header } from 'react-native/Libraries/NewAppScreen';
 
 
@@ -20,7 +21,7 @@ const Stack = createStackNavigator();
 
 function SearchTabs(){
   return (
-    <Tab.Navigator initialRouteName='Login' screenOptions={({ route }) => ({
+    <Tab.Navigator initialRouteName='Search' screenOptions={({ route }) => ({
       tabBarIcon: ({ focused, color, size }) => {
         let iconName;
         if (route.name === "Search") {
@@ -46,11 +47,12 @@ function SearchTabs(){
 export default function Navigation() {
   return (
     <Stack.Navigator >
-      <Stack.Screen name="Login" component={LoginScreen} options={{headerShown:false}}/>
+      {/* <Stack.Screen name="Login" component={LoginScreen} options={{headerShown:false}}/> */}
       <Stack.Screen name="Search" component={SearchTabs} options={{headerShown:false}}/>
       <Stack.Screen name="Detail" component={DetailScreen} options={{headerShown:false}}/>
       <Stack.Screen name="Favorite" component={FavoriteScreen} />
       <Stack.Screen name="UserSignIn" component={UserSignScreen} options={{headerShown:false}}/>
+      <Stack.Screen name="UpdateUser" component={UpdateUser} options={{headerShown:false}}/>
     </Stack.Navigator>
   );
 }
