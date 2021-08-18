@@ -3,7 +3,8 @@ import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Foundation as Icon} from '@expo/vector-icons'
+import { AntDesign as Icon} from '@expo/vector-icons'
+import { AntDesign, Ionicons } from '@expo/vector-icons'
 
 import SearchScreen from './pages/Search';
 import ProfileScreen from './pages/Profile';
@@ -19,17 +20,20 @@ const Tab = createBottomTabNavigator();
 
 const Stack = createStackNavigator();
 
+
 function SearchTabs(){
+
   return (
     <Tab.Navigator initialRouteName='Search' screenOptions={({ route }) => ({
       tabBarIcon: ({ focused, color, size }) => {
         let iconName;
         if (route.name === "Search") {
-          iconName = "map";
-        } else if (route.name === "Search") {
+          iconName = "user";
+        } else if (route.name === "Profile") {
           iconName = "user";
         }
-        return <Icon name="map" size={size} color={color} />;
+        
+        return <Icon name="user" size={size} color={color} />;
       },
         })}
         tabBarOptions={{ style: {
@@ -38,7 +42,7 @@ function SearchTabs(){
         },
         activeTintColor:'#000080'}}
       >
-        <Tab.Screen name="Search" component={SearchScreen} />
+        <Tab.Screen name="Search" component={SearchScreen} options={{ tabBarIcon: () => <AntDesign name="home" size={30}/>}} />
         <Tab.Screen name="Profile" component={ProfileScreen} />
       </Tab.Navigator>
   );
