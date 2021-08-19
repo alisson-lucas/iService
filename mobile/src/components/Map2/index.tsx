@@ -1,11 +1,13 @@
 import React, {Component, useRef, useState, useEffect} from 'react'
 import MapView, { PROVIDER_GOOGLE, Marker, Callout } from 'react-native-maps'
-import {View, StyleSheet, Text, TouchableOpacity, Alert} from 'react-native'
+import {View, StyleSheet, Text, TouchableOpacity, Alert, Image} from 'react-native'
 import { Container, PopupContainer, PopupTitle, PopupProvider, PopupDescription, ButtonContainer, PopupButton, PopupButton2, ButtonText } from './styles';
 import { Modalize } from 'react-native-modalize';
 import { useNavigation } from '@react-navigation/native';
 import * as Location from 'expo-location';
 import { UserController } from '../../controllers/user.controller';
+
+import point from '../../../assets/images/misc/marker.png';
 
 
 export default function Map2(){
@@ -58,7 +60,7 @@ export default function Map2(){
                     }
                 }>
                     <Marker coordinate={{latitude: -7.951833 , longitude: -34.8777377}} onPress={handleNavigateDetail}>
-                    {/* <Image style={styles.icone} source={Drone} /> */}
+                    <Image style={styles.icone} source={point} />
                         <Callout >
                             <View style={styles.callout} >
                                 <Text style={styles.name}>Voo de Monitoramento de Temperatura</Text>
@@ -109,5 +111,11 @@ const styles = StyleSheet.create({
 
     piloto: {
         marginTop: 5
+    },
+
+    icone: {
+        width: 54,
+        height: 77,
     }
+
 });
