@@ -15,7 +15,7 @@ export const ProfileImageContainer = styled.View`
 `;
 
 export const PickImage = styled.TouchableOpacity`
-  
+   margin-top: 10px;
 `;
 
 export const ProfileImage = styled.Image`
