@@ -7,11 +7,15 @@ export const Container = styled.SafeAreaView`
   justify-content: center;
 `;
 
-export const ProfileImageContainer = styled.TouchableOpacity`
+export const ProfileImageContainer = styled.View`
   display: flex;
   align-items: center;
   justify-content: center;
   margin-top: -150px;
+`;
+
+export const PickImage = styled.TouchableOpacity`
+  
 `;
 
 export const ProfileImage = styled.Image`
