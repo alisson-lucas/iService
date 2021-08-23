@@ -1,10 +1,12 @@
 import React, { useState, useEffect} from 'react'
 import MapView, { PROVIDER_GOOGLE, Marker, Callout } from 'react-native-maps'
-import { View, StyleSheet, Text, TouchableOpacity, Alert } from 'react-native'
+import { View, StyleSheet, Text, TouchableOpacity, Alert, Image } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
 import * as Location from 'expo-location';
 
 import { UserController } from '../../controllers/user.controller';
+
+import point from '../../../assets/images/misc/marker.png';
 
 const ISMapView = () => {
     const navigation = useNavigation();
@@ -66,6 +68,7 @@ const ISMapView = () => {
                                     }
                                 }
                             >
+                                <Image style={styles.icone} source={point} />
                                 <Callout onPress={ () => handleNavigateDetail(profissional)}>
                                     <View style={styles.callout}>
                                         <Text style={styles.name}>{ profissional['name'] }</Text>
@@ -112,6 +115,11 @@ const styles = StyleSheet.create({
 
     piloto: {
         marginTop: 5
+    },
+
+    icone: {
+        width: 54,
+        height: 77,
     }
 });
 

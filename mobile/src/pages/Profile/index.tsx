@@ -12,6 +12,10 @@ export default function Profile(){
         navigation.goBack();
     };
 
+    function handleUpdateUser(){
+        navigation.navigate('UpdateUser');
+    };
+
     return (
         <Container>
             <DetailContainer>
@@ -20,7 +24,7 @@ export default function Profile(){
                 <DetailDescription>Treinos de força, funcional e aeróbico</DetailDescription>
                 <DetailProvider>Áreas de atuação :</DetailProvider>
                 <ButtonContainer>
-                    <DetailButton2>
+                    <DetailButton2 onPress={handleUpdateUser}>
                         <ButtonText>Alterar informações</ButtonText>
                     </DetailButton2>
                 </ButtonContainer>
