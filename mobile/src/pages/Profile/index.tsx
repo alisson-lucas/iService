@@ -8,6 +8,7 @@ import avatar from '../../../assets/images/misc/user-avatar.png';
 
 export default function Profile(){
     const { user, setUser }  = useContext(AuthContext)
+    const [type, setType] = useState<string | null>("CLIENTE");
     const [userName, setUserName] = useState<string | null>('');
     const [userDescription, setUserDescription] = useState<string | null>('');
     const [userOcupation, setUserOcupation] = useState([]);
@@ -29,6 +30,7 @@ export default function Profile(){
         setUserName(userData.data.name) 
         setUserDescription(userData.data.description) 
         setUserOcupation(userData.data.occupation) 
+        setType(userData.data.type)
 
         console.log('Dados do usuario', userData)
         console.log('Dados do userName', userName)
@@ -44,8 +46,12 @@ export default function Profile(){
                 <ProviderImage source={avatar}></ProviderImage>
                 <DetailTitle>{userName}</DetailTitle>
                 <DetailDescription>{userDescription}</DetailDescription>
-                <DetailProvider>Áreas de atuação :</DetailProvider>
-                <DetailProviderOccupations>{userOcupation.join(", ")}</DetailProviderOccupations>
+                { type == "PROFISSIONAL" && 
+                    <>
+                        <DetailProvider>Áreas de atuação :</DetailProvider>
+                        <DetailProviderOccupations>{userOcupation.join(", ")}</DetailProviderOccupations>
+                    </>
+                }
                 <ButtonContainer>
                     <DetailButton2 onPress={handleUpdateUser}>
                         <ButtonText>Alterar informações</ButtonText>
