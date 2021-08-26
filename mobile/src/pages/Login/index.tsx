@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-
+import AuthContext from '../../contexts/auth';
 import { Container, TextInputBold, FormContainer, LogoImage, FormButton, TextButton, BtnPassword, TextBottom, BtnSign } from './styles';
 
 import Logo from '../../../assets/images/misc/iservice-logo.png';
@@ -13,6 +13,7 @@ const UserLoginScreen = () => {
     const navigation = useNavigation();
     const [email,setEmail] = useState<string | null>(null)
     const [password,setPassword] = useState<string | null>(null)
+    const { user, setUser }  = useContext(AuthContext)
     
     
     const Register=() => {
@@ -27,11 +28,14 @@ const UserLoginScreen = () => {
         API.post("/users/login", {username:email,password}).then(response => {
             console.log("Resposta do Login = ", response.data);
             navigation.navigate('Search');
+            setUser(response.data);
+            
         }).catch(error => {
             console.log("Aconteceu um erro = ",error.response.data);
             
 
         })
+
     }
 
   return (

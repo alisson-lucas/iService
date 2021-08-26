@@ -1,12 +1,19 @@
-import React, {Component, useRef, useState, useEffect} from 'react'
+import React, {Component, useRef, useState, useEffect, useContext} from 'react'
 import { useNavigation, useRoute } from '@react-navigation/native';
-import { Container, Header,BackButton,DetailContainer,ProviderImage, DetailTitle, DetailProvider, DetailDescription, ButtonContainer, DetailButton2, ButtonText } from './styles';
+import { Container, Header,BackButton,DetailContainer, DetailProviderOccupations, ProviderImage, DetailTitle, DetailProvider, DetailDescription, ButtonContainer, DetailButton2, ButtonText } from './styles';
 import { Feather as Icon, FontAwesome5 } from '@expo/vector-icons'
+import AuthContext from '../../contexts/auth';
 
 import avatar from '../../../assets/images/misc/user-avatar.png';
 
 export default function Profile(){
+    const { user, setUser }  = useContext(AuthContext)
+    const [userName, setUserName] = useState<string | null>('');
+    const [userDescription, setUserDescription] = useState<string | null>('');
+    const [userOcupation, setUserOcupation] = useState([]);
+
     const navigation = useNavigation();
+
     
     function handleBackScreen(){
         navigation.goBack();
@@ -16,13 +23,29 @@ export default function Profile(){
         navigation.navigate('UpdateUser');
     };
 
+    function getUser(){
+        const userData : any = user;
+
+        setUserName(userData.data.name) 
+        setUserDescription(userData.data.description) 
+        setUserOcupation(userData.data.occupation) 
+
+        console.log('Dados do usuario', userData)
+        console.log('Dados do userName', userName)
+    }
+
+    useEffect(() => {
+        getUser();
+    }, [])
+
     return (
         <Container>
             <DetailContainer>
                 <ProviderImage source={avatar}></ProviderImage>
-                <DetailTitle>João José</DetailTitle>
-                <DetailDescription>Treinos de força, funcional e aeróbico</DetailDescription>
+                <DetailTitle>{userName}</DetailTitle>
+                <DetailDescription>{userDescription}</DetailDescription>
                 <DetailProvider>Áreas de atuação :</DetailProvider>
+                <DetailProviderOccupations>{userOcupation.join(", ")}</DetailProviderOccupations>
                 <ButtonContainer>
                     <DetailButton2 onPress={handleUpdateUser}>
                         <ButtonText>Alterar informações</ButtonText>

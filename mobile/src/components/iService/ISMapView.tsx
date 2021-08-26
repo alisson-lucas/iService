@@ -18,7 +18,7 @@ const ISMapView = () => {
     };
 
     const loadPosition = async() => {
-        const { status } = await Location.requestBackgroundPermissionsAsync();
+        const { status } = await Location.requestPermissionsAsync();
 
         if (status !== 'granted') {
             Alert.alert('Opa, houve um problema', 'Precisamos da sua Localização');

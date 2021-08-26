@@ -41,7 +41,12 @@ export const DetailTitle = styled.Text`
 
 export const DetailProvider = styled.Text`
     font-size: 16px;
-    margin-top: 80px;
+    margin-top: 50px;
+`;
+
+export const DetailProviderOccupations = styled.Text`
+    font-size: 16px;
+    margin-top: 20px;
 `;
 
 export const DetailDescription = styled.Text`
@@ -52,7 +57,7 @@ export const DetailDescription = styled.Text`
 export const ButtonContainer = styled.View`
     flex-direction: row;
     justify-content: space-around;
-    margin-top: 35%;
+    margin-top: 30%;
     margin-bottom: 90px;
 `;
 

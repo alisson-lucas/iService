@@ -1,7 +1,8 @@
-import React, { useState, useEffect,  } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { View, Platform, Image } from 'react-native';
 import { ISTextInput } from '../../components/iService/ISTextInput';
 import * as ImagePicker from 'expo-image-picker';
+import AuthContext from '../../contexts/auth';
 
 import { Container, ProfileImage, ProfileImageContainer, PickImage, ImageLabel, FormButton, TextButton } from './styles';
 
@@ -19,15 +20,18 @@ const initialErrorsState: { [key: string]: string | null } = {
 };
 
 const updateUser = () => {
+  const { user, setUser }  = useContext(AuthContext);
   const [username, setUsername] = useState<string | null>(null);
   const [password, setPassword] = useState<string | null>(null);
   const [repeat_password, setRepeatPassword] = useState<string | null>(null);
   const [type, setType] = useState<string | null>("CLIENTE");
-  const [name, setName] = useState<string | null>(null);
+  const [name, setName] = useState<string | null>();
   const [cpf, setCpf] = useState<string>('');
   const [image, setImage] = useState<any>(null);
 
   const [errors, setError] = useState(initialErrorsState);
+
+  
 
   useEffect(() => {
     (async () => {
@@ -54,6 +58,21 @@ const updateUser = () => {
       setImage(result.uri);
     }
   };
+
+//   function getUser(){
+//     const userData = user;
+
+//     setName(userData.data.name) 
+//     // setUserDescription(userData.data.description) 
+//     // setUserOcupation(userData.data.occupation) 
+
+//     console.log('Dados do usuario', userData)
+//     // console.log('Dados do userName', userName)
+// }
+
+// useEffect(() => {
+//     getUser();
+// }, [])
 
 
   return (
