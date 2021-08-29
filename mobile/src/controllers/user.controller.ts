@@ -46,6 +46,25 @@ export abstract class UserController {
             });
     };
 
+    public static async update(updateUser: any) {
+        const dataReturn = {
+            data: <any>null,
+            error: <any>null,
+        };
+
+        return API.post(this.DEFAULT_ROUTE.concat("/update"), updateUser)
+            .then(response => {
+                console.log("Response sem erro =", response.data);
+                dataReturn.data = response.data;
+                return dataReturn;
+            })
+            .catch(error => {
+                console.log("Response com erro=", error.response.data.message);
+                dataReturn.error = this.mapError(error.response.data.message);
+                return dataReturn;
+            });
+    };
+
     private static mapError(message: string) {
         const error = {
             field: "",

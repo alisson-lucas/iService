@@ -4,6 +4,8 @@ import { ISTextInput } from '../../components/iService/ISTextInput';
 import * as ImagePicker from 'expo-image-picker';
 import AuthContext from '../../contexts/auth';
 import ISGooglePlacesInput from '../../components/iService/ISGooglePlacesInput';
+import { UserController } from '../../controllers/user.controller';
+import { useNavigation } from '@react-navigation/native';
 
 import { Container, ProfileImage, ProfileImageContainer, PickImage, ImageLabel, FormButton, TextButton } from './styles';
 
@@ -23,6 +25,7 @@ const initialErrorsState: { [key: string]: string | null } = {
 };
 
 const updateUser = () => {
+  const navigation = useNavigation();
   const { user, setUser }  = useContext(AuthContext);
   const [username, setUsername] = useState<string>();
   const [password, setPassword] = useState<string>();
@@ -89,12 +92,40 @@ const updateUser = () => {
 
     console.log('Dados do usuario', userData)
     console.log('Dados do teste', userData.data.name)
-}
+  }
 
-useEffect(() => {
-    getUser();
-}, [])
+  useEffect(() => {
+      getUser();
+  }, [])
 
+  const updateUser = () => {
+    const updateUser = {
+      username,
+      password,
+      repeat_password,
+      type,
+      name,
+      cpf,
+      address,
+      phone,
+      // gender,
+      // description,
+      // occupation,
+      lat,
+      lng
+    };
+    console.log("Tentando registrar: ", updateUser);
+
+    UserController.update(updateUser).then((response) => {
+      if (response.error) {
+        setError( { ...errors, [response.error.field]: response.error.message });
+        console.log("Erros Mapeados", errors);
+      } else { 
+        navigation.navigate('Search');
+      }
+
+    });
+  };
 
   return (
     <Container>
@@ -117,7 +148,7 @@ useEffect(() => {
             </>
           }
           
-          <FormButton>
+          <FormButton onPress={updateUser}>
             <TextButton>Atualizar Informações</TextButton>
           </FormButton>
     </Container>

@@ -18,7 +18,7 @@ const ISMapView = () => {
     };
 
     const loadPosition = async() => {
-        const { status } = await Location.requestPermissionsAsync();
+        const { status } = await Location.requestForegroundPermissionsAsync();
 
         if (status !== 'granted') {
             Alert.alert('Opa, houve um problema', 'Precisamos da sua Localização');
@@ -29,8 +29,8 @@ const ISMapView = () => {
         const { latitude, longitude } = location.coords;
 
         console.log("Actual Lat Long = ", {latitude, longitude})
-        //setInitialPosition([latitude, longitude]);
-        setInitialPosition([-7.84252, -34.9085]);
+        setInitialPosition([latitude, longitude]);
+        // setInitialPosition([-7.84252, -34.9085]);
     }
 
     const getProfissionais = async () => {
