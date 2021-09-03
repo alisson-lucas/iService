@@ -1,21 +1,43 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 import { View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import AuthContext from '../../contexts/auth';
 import { Container, TextInputBold, FormContainer, LogoImage, FormButton, TextButton, BtnPassword, TextBottom, BtnSign } from './styles';
+import LottieView from 'lottie-react-native';
 
 import Logo from '../../../assets/images/misc/iservice-logo.png';
 import { Input, Text } from 'react-native-elements';
 import { API } from '../../services/api';
 import { Icon } from 'react-native-elements/dist/icons/Icon';
 
+import LoadingImage from '../../../assets/loading.json';
+
 const UserLoginScreen = () => {
     const navigation = useNavigation();
     const [email,setEmail] = useState<string | null>(null)
     const [password,setPassword] = useState<string | null>(null)
+    const [isLiked, serIsLiked] = useState<any>(true)
     const { user, setUser }  = useContext(AuthContext)
     
+
+    const animation = React.useRef<any>(null);
+    const isFirstRun = React.useRef(true);
     
+    React.useEffect(() => {
+        if (isFirstRun.current) {
+            animation.current.play(66, 66);
+          if (isLiked) {
+          } else {
+            animation.current.play(19, 19);
+          }
+          isFirstRun.current = false;
+        } else if (isLiked) {
+          animation.current.play(19, 50);
+        } else {
+          animation.current.play(0, 19);
+        }
+    }, []);
+
     const Register=() => {
         navigation.navigate('UserRegister');
     };
@@ -58,6 +80,22 @@ const UserLoginScreen = () => {
                 onChangeText={value => setPassword(value)}
                 secureTextEntry={true}
             ></Input>
+            { isLiked == true &&
+            <LottieView
+                ref={animation}
+                autoPlay={false}
+                style={{
+                    position: 'absolute',
+                    zIndex: 1,
+                    width: 80,
+                    height: 80,
+                    backgroundColor: '#f8f6f6',
+                }}
+                source={require('../../../assets/loading.json')}
+               
+            />
+            
+            }
     
             <FormButton>
                 <TextButton onPress={Login}>Login</TextButton>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Alert } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
 
 import { ISCheckboxGroup } from '../../components/iService/ISCheckboxGroup';
@@ -91,6 +91,8 @@ const UserRegisterScreen = () => {
         setError( { ...errors, [response.error.field]: response.error.message });
         console.log("Erros Mapeados", errors);
       } else { 
+        Alert.alert("Cadastrado com sucesso!");
+
         navigation.navigate('UserLogin');
       }
 
