@@ -16,7 +16,9 @@ export interface UserAttributes {
     phone: string,
     gender: Gender,
     description: string,
-    occupation: string
+    occupation: string,
+    lat: number,
+    lng: number
 };
 
 export interface UserModel extends Model<UserAttributes>, UserAttributes {
@@ -86,6 +88,12 @@ export function UserFactory(sequelize: Sequelize): UserStatic {
                 this.setDataValue("occupation", ocuppations.join(';'));
             },
         },
+        lat: {
+            type: DataTypes.FLOAT
+        },
+        lng: {
+            type: DataTypes.FLOAT
+        }
     });
 
     User.generateSalt = (): string => {
