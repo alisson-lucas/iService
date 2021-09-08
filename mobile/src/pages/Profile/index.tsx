@@ -1,10 +1,12 @@
 import React, {Component, useRef, useState, useEffect, useContext} from 'react'
 import { useNavigation, useRoute } from '@react-navigation/native';
-import { Container, Header,BackButton,DetailContainer, DetailProviderOccupations, ProviderImage, DetailTitle, DetailProvider, DetailDescription, ButtonContainer, DetailButton2, ButtonText } from './styles';
+import { Container, Header,SettingsButton,DetailContainer, DetailProviderOccupations, ProviderImage, DetailTitle, DetailProvider, DetailDescription, ButtonContainer, DetailButton2, ButtonText } from './styles';
 import { Feather as Icon, FontAwesome5 } from '@expo/vector-icons'
 import AuthContext from '../../contexts/auth';
 
 import avatar from '../../../assets/images/misc/user-avatar.png';
+
+import Menu from '../Menu'
 
 export default function Profile(){
     const { user, setUser }  = useContext(AuthContext)
@@ -23,17 +25,21 @@ export default function Profile(){
     function handleUpdateUser(){
         navigation.navigate('UpdateUser');
     };
+    
+    // function handleMenu(){
+    //     navigation.navigate('Menu');
+    // };
 
     function getUser(){
-        const userData : any = user;
+        // const userData : any = user;
 
-        setUserName(userData.data.name) 
-        setUserDescription(userData.data.description) 
-        setUserOcupation(userData.data.occupation) 
-        setType(userData.data.type)
+        // setUserName(userData.data.name) 
+        // setUserDescription(userData.data.description) 
+        // setUserOcupation(userData.data.occupation) 
+        // setType(userData.data.type)
 
-        console.log('Dados do usuario', userData)
-        console.log('Dados do userName', userName)
+        // console.log('Dados do usuario', userData)
+        // console.log('Dados do userName', userName)
     }
 
     useEffect(() => {
@@ -42,6 +48,12 @@ export default function Profile(){
 
     return (
         <Container>
+                <Menu/>
+            <Header>
+                <SettingsButton onPress={() => {}} >
+                    <Icon name="settings" color="#000080" size={25}/>
+                </SettingsButton>
+            </Header>
             <DetailContainer>
                 <ProviderImage source={avatar}></ProviderImage>
                 <DetailTitle>{userName}</DetailTitle>

@@ -7,13 +7,13 @@ export const Container = styled.SafeAreaView`
 
 export const Header = styled.View`
     height: 50px;
-    padding: 0 16px;
+    padding: 0 26px;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
 `;
 
-export const BackButton = styled.TouchableOpacity``;
+export const SettingsButton = styled.TouchableOpacity``;
 
 export const DetailContainer = styled.View`
     display: flex;
