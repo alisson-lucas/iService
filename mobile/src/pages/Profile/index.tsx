@@ -1,8 +1,12 @@
 import React, {Component, useRef, useState, useEffect, useContext} from 'react'
 import { useNavigation, useRoute } from '@react-navigation/native';
-import { Container, Header,SettingsButton,DetailContainer, DetailProviderOccupations, ProviderImage, DetailTitle, DetailProvider, DetailDescription, ButtonContainer, DetailButton2, ButtonText } from './styles';
+import { Container, Header,SettingsButton,DetailContainer, DetailProviderOccupations, ProviderImage, DetailTitle,
+    DetailProvider, DetailDescription, ButtonContainer, DetailButton2, ButtonText, ModalContainer, ModalScroll,
+    BtnMenu, BtnMenuText } from './styles';
 import { Feather as Icon, FontAwesome5 } from '@expo/vector-icons'
 import AuthContext from '../../contexts/auth';
+import Modal from "react-native-modal";
+
 
 import avatar from '../../../assets/images/misc/user-avatar.png';
 
@@ -14,6 +18,7 @@ export default function Profile(){
     const [userName, setUserName] = useState<string | null>('');
     const [userDescription, setUserDescription] = useState<string | null>('');
     const [userOcupation, setUserOcupation] = useState([]);
+    const [isModalVisible, setModalVisible] = useState(false);
 
     const navigation = useNavigation();
 
@@ -24,6 +29,10 @@ export default function Profile(){
 
     function handleUpdateUser(){
         navigation.navigate('UpdateUser');
+    };
+
+    const toggleModal = () => {
+        setModalVisible(!isModalVisible);
     };
     
     // function handleMenu(){
@@ -48,9 +57,9 @@ export default function Profile(){
 
     return (
         <Container>
-                <Menu/>
+                {/* <Menu/> */}
             <Header>
-                <SettingsButton onPress={() => {}} >
+                <SettingsButton onPress={toggleModal} >
                     <Icon name="settings" color="#000080" size={25}/>
                 </SettingsButton>
             </Header>
@@ -70,6 +79,15 @@ export default function Profile(){
                     </DetailButton2>
                 </ButtonContainer>
             </DetailContainer>
+            <Modal isVisible={isModalVisible} onBackdropPress={() => setModalVisible(false)} animationIn='slideInRight' animationOut='slideOutRight'>
+                <ModalContainer>
+                    <ModalScroll>
+                        <BtnMenu>
+                            <BtnMenuText>Sair</BtnMenuText>
+                        </BtnMenu>
+                    </ModalScroll>
+                </ModalContainer>
+            </Modal>
         </Container>
     );
 };
