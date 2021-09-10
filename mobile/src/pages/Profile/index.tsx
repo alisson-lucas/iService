@@ -31,6 +31,10 @@ export default function Profile(){
         navigation.navigate('UpdateUser');
     };
 
+    function handleLogin(){
+        navigation.navigate('UserLogin');
+    };
+
     const toggleModal = () => {
         setModalVisible(!isModalVisible);
     };
@@ -40,15 +44,15 @@ export default function Profile(){
     // };
 
     function getUser(){
-        // const userData : any = user;
+        const userData : any = user;
 
-        // setUserName(userData.data.name) 
-        // setUserDescription(userData.data.description) 
-        // setUserOcupation(userData.data.occupation) 
-        // setType(userData.data.type)
+        setUserName(userData.data.name) 
+        setUserDescription(userData.data.description) 
+        setUserOcupation(userData.data.occupation) 
+        setType(userData.data.type)
 
-        // console.log('Dados do usuario', userData)
-        // console.log('Dados do userName', userName)
+        console.log('Dados do usuario', userData)
+        console.log('Dados do userName', userName)
     }
 
     useEffect(() => {
@@ -82,7 +86,7 @@ export default function Profile(){
             <Modal isVisible={isModalVisible} onBackdropPress={() => setModalVisible(false)} animationIn='slideInRight' animationOut='slideOutRight'>
                 <ModalContainer>
                     <ModalScroll>
-                        <BtnMenu>
+                        <BtnMenu onPress={handleLogin}>
                             <BtnMenuText>Sair</BtnMenuText>
                         </BtnMenu>
                     </ModalScroll>
