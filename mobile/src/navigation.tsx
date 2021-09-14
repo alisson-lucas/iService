@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import { Foundation as Icon} from '@expo/vector-icons'
 import { AntDesign, Ionicons, FontAwesome } from '@expo/vector-icons'
 
@@ -12,9 +13,11 @@ import FavoriteScreen from './pages/Favorite';
 import UserLoginScreen from './pages/Login';
 import UserRegisterScreen from './pages/Register';
 import updateUser from './pages/updateUser';
+import Menu from './pages/Menu'
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
+const Drawer = createDrawerNavigator();
 
 const icons : any = {
   Search: {
@@ -28,6 +31,14 @@ const icons : any = {
     size: 28
   },
   
+}
+
+export const DrawerMenu = () => {
+  return(
+    <Drawer.Navigator>
+      <Drawer.Screen name="Profile" component={ProfileScreen} />
+    </Drawer.Navigator>
+  );
 }
 
 const SearchTabs = () => {
@@ -60,6 +71,7 @@ export default function Navigation() {
       <Stack.Screen name="Favorite" component={FavoriteScreen} />
       <Stack.Screen name="UserRegister" component={UserRegisterScreen} options={{headerShown:false}}/>
       <Stack.Screen name="UpdateUser" component={updateUser} options={{headerShown:false}}/>
+      <Stack.Screen name="Menu" component={Menu} options={{headerShown:false}}/>
     </Stack.Navigator>
   );
 }

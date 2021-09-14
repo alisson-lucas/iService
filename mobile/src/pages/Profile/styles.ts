@@ -7,13 +7,13 @@ export const Container = styled.SafeAreaView`
 
 export const Header = styled.View`
     height: 50px;
-    padding: 0 16px;
+    padding: 0 26px;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
 `;
 
-export const BackButton = styled.TouchableOpacity``;
+export const SettingsButton = styled.TouchableOpacity``;
 
 export const DetailContainer = styled.View`
     display: flex;
@@ -83,3 +83,30 @@ export const ButtonText = styled.Text`
     font-weight: bold;
     
 `;
+
+export const ModalContainer = styled.View`
+    flex: 1;
+    background-color: #fff;
+    width: 55%;
+    margin-left: 50%;
+    /* align-items: center; */
+    /* justify-content: flex-start; */
+`;
+
+export const ModalScroll = styled.ScrollView``;
+
+export const BtnMenu = styled.TouchableOpacity`
+    background-color: #c0c0c0;
+    height: 50px;
+    width: 100%;
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+
+export const BtnMenuText = styled.Text`
+    color: #800000;
+    font-size: 16px;
+    /* font-weight: bold; */
+`

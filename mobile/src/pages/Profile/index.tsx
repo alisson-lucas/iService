@@ -1,10 +1,16 @@
 import React, {Component, useRef, useState, useEffect, useContext} from 'react'
 import { useNavigation, useRoute } from '@react-navigation/native';
-import { Container, Header,BackButton,DetailContainer, DetailProviderOccupations, ProviderImage, DetailTitle, DetailProvider, DetailDescription, ButtonContainer, DetailButton2, ButtonText } from './styles';
+import { Container, Header,SettingsButton,DetailContainer, DetailProviderOccupations, ProviderImage, DetailTitle,
+    DetailProvider, DetailDescription, ButtonContainer, DetailButton2, ButtonText, ModalContainer, ModalScroll,
+    BtnMenu, BtnMenuText } from './styles';
 import { Feather as Icon, FontAwesome5 } from '@expo/vector-icons'
 import AuthContext from '../../contexts/auth';
+import Modal from "react-native-modal";
+
 
 import avatar from '../../../assets/images/misc/user-avatar.png';
+
+import Menu from '../Menu'
 
 export default function Profile(){
     const { user, setUser }  = useContext(AuthContext)
@@ -12,6 +18,7 @@ export default function Profile(){
     const [userName, setUserName] = useState<string | null>('');
     const [userDescription, setUserDescription] = useState<string | null>('');
     const [userOcupation, setUserOcupation] = useState([]);
+    const [isModalVisible, setModalVisible] = useState(false);
 
     const navigation = useNavigation();
 
@@ -23,6 +30,18 @@ export default function Profile(){
     function handleUpdateUser(){
         navigation.navigate('UpdateUser');
     };
+
+    function handleLogin(){
+        navigation.navigate('UserLogin');
+    };
+
+    const toggleModal = () => {
+        setModalVisible(!isModalVisible);
+    };
+    
+    // function handleMenu(){
+    //     navigation.navigate('Menu');
+    // };
 
     function getUser(){
         const userData : any = user;
@@ -42,6 +61,12 @@ export default function Profile(){
 
     return (
         <Container>
+                {/* <Menu/> */}
+            <Header>
+                <SettingsButton onPress={toggleModal} >
+                    <Icon name="settings" color="#000080" size={25}/>
+                </SettingsButton>
+            </Header>
             <DetailContainer>
                 <ProviderImage source={avatar}></ProviderImage>
                 <DetailTitle>{userName}</DetailTitle>
@@ -58,6 +83,15 @@ export default function Profile(){
                     </DetailButton2>
                 </ButtonContainer>
             </DetailContainer>
+            <Modal isVisible={isModalVisible} onBackdropPress={() => setModalVisible(false)} animationIn='slideInRight' animationOut='slideOutRight'>
+                <ModalContainer>
+                    <ModalScroll>
+                        <BtnMenu onPress={handleLogin}>
+                            <BtnMenuText>Sair</BtnMenuText>
+                        </BtnMenu>
+                    </ModalScroll>
+                </ModalContainer>
+            </Modal>
         </Container>
     );
 };
