@@ -23,6 +23,10 @@ const UserLoginScreen = () => {
     const Register=() => {
         navigation.navigate('UserRegister');
     };
+    
+    const ForgotPassword=() => {
+        navigation.navigate('ForgotPassword');
+    };
 
     const Login = () => 
     {
@@ -75,7 +79,7 @@ const UserLoginScreen = () => {
                 <TextButton onPress={Login}>Login</TextButton>
             </FormButton>
             
-            <BtnPassword>
+            <BtnPassword onPress={ForgotPassword}>
                 <TextBottom>Esqueci minha senha</TextBottom>
             </BtnPassword>
             <BtnSign onPress={Register}>

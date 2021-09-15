@@ -13,6 +13,7 @@ import FavoriteScreen from './pages/Favorite';
 import UserLoginScreen from './pages/Login';
 import UserRegisterScreen from './pages/Register';
 import updateUser from './pages/updateUser';
+import ForgotPassword from './pages/forgotPassword';
 import Menu from './pages/Menu'
 
 const Tab = createBottomTabNavigator();
@@ -72,6 +73,7 @@ export default function Navigation() {
       <Stack.Screen name="UserRegister" component={UserRegisterScreen} options={{headerShown:false}}/>
       <Stack.Screen name="UpdateUser" component={updateUser} options={{headerShown:false}}/>
       <Stack.Screen name="Menu" component={Menu} options={{headerShown:false}}/>
+      <Stack.Screen name="ForgotPassword" component={ForgotPassword} options={{headerShown:false}}/>
     </Stack.Navigator>
   );
 }
