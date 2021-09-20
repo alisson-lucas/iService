@@ -15,6 +15,18 @@ export abstract class UserController {
         });
     };
 
+    public static async getUser(username: any)  {
+        return await API.post(this.DEFAULT_ROUTE.concat("/find?username=",username))
+        .then(response => {
+            console.log("Response FIND =", response);
+            return response.data;
+        })
+        .catch(error => {
+            console.log("Error FIND =", error.data.error);
+            return error;
+        });
+    };
+
     public static async login(loginRequest: any) {
         return API.post(this.DEFAULT_ROUTE.concat("/login"), loginRequest)
             .then(response => {

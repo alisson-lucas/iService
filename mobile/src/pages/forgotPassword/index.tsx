@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { View, TextInput, StyleSheet } from 'react-native';
+import { View, TextInput, StyleSheet, Alert } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { AntDesign as Icon, FontAwesome5 } from '@expo/vector-icons'
+import { UserController } from '../../controllers/user.controller';
 
 import { Container, HeaderContainer, BodyContainer, CardEmail, CardPassword, Title, SubTitle, ConfirmButton, TextButton } from './styles';
 
@@ -9,6 +10,7 @@ import blueVersion from '../../styles/colors';
 
 const forgotPassword: React.FC = () => {
   const [isValid, setIsValid] = useState<boolean>(false);
+  const [userEmail, setUserEmail] = useState<string>('');
 
   const navigation = useNavigation();
 
@@ -19,6 +21,21 @@ const forgotPassword: React.FC = () => {
   const confirmEmail = () => {
     setIsValid(!isValid);
   };
+
+  function getUser() {
+    const user = {
+      userEmail
+    }
+    UserController.getUser(user.userEmail).then((response) => {
+      if (response.error) {
+        console.log("Erros Mapeados", response.error);
+        Alert.alert("Este email ainda não foi cadastrado!");
+      } else { 
+        setIsValid(true);
+      }
+
+    })
+  }
 
   return (
       <Container>
@@ -31,8 +48,8 @@ const forgotPassword: React.FC = () => {
           {!isValid ? 
             <CardEmail>
               <SubTitle>Digite o seu email:</SubTitle>
-              <TextInput style={styles.input}></TextInput>
-              <ConfirmButton onPress={confirmEmail}>
+              <TextInput style={styles.input} value={userEmail} onChangeText={(value: string) => setUserEmail(value)}></TextInput>
+              <ConfirmButton onPress={getUser}>
                 <TextButton>Confirmar</TextButton>
               </ConfirmButton>
             </CardEmail>
