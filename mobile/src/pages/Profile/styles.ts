@@ -11,6 +11,7 @@ export const Header = styled.View`
     flex-direction: row;
     align-items: center;
     justify-content: flex-end;
+    margin-top: 40px;
 `;
 
 export const SettingsButton = styled.TouchableOpacity``;
