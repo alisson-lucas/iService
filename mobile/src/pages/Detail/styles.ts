@@ -78,3 +78,51 @@ export const ButtonText = styled.Text`
     font-weight: bold;
     
 `;
+
+export const ModalContainer = styled.View`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    width: 75%;
+    height: 180px;
+    margin-left: 12%;
+    border-radius: 8px;
+    /* align-items: center; */
+    /* justify-content: flex-start; */
+`;
+
+export const ContactContainer = styled.View``;
+
+export const ContactText = styled.Text`
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+`;
+
+export const ContactNumber = styled.Text`
+    font-size: 14px;
+    text-align: center;
+    margin-top: 20px;
+
+`;
+
+export const ModalScroll = styled.ScrollView``;
+
+export const BtnMenu = styled.TouchableOpacity`
+    background-color: #25d366;
+    height: 50px;
+    width: 150px;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+`;
+
+export const BtnMenuText = styled.Text`
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+`
