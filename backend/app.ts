@@ -10,6 +10,7 @@ import * as dotenv from 'dotenv';
 import { database } from "./src/models";
 import { CommonRoutesConfig } from './src/common/common.routes.config';
 import { UsersRoutes } from './src/routes/users.routes.config';
+import { MailRoutes } from './src/routes/mail.routes.config';
 
 dotenv.config();
 
@@ -37,6 +38,7 @@ app.use(expressWinston.logger({
 }));
 
 routes.push(new UsersRoutes(app));
+routes.push(new MailRoutes(app));
 
 app.use(expressWinston.errorLogger({
     transports: [

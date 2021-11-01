@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
     //
     borderColor: blueVersion.lightGray,
     width: '80%',
-    marginTop: 15
+    marginTop: 15,
 },
 });
 
