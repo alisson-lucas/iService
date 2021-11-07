@@ -7,8 +7,8 @@ import { useNavigation } from '@react-navigation/native';
 import { Feather as Icon } from '@expo/vector-icons'
 
 import { Container, Header, BackButton, DetailContainer, ProviderImage, DetailTitle, DetailProvider,
-DetailDescription, ButtonContainer, DetailButton, DetailButton2, ButtonText,  ModalContainer, ContactContainer, ContactText, ContactNumber, ModalScroll,
-BtnMenu, BtnMenuText } from './styles';
+DetailDescription, ButtonContainer, DetailButton, DetailButton2, ButtonText,  ModalContainer, ContactContainer, ContactButtonContainer, ContactText, ContactNumber, ModalScroll,
+BtnMenu, BtnMenuText, BtnPhone} from './styles';
 import avatar from '../../../assets/images/misc/user-avatar.png';
 
 
@@ -24,18 +24,14 @@ const Detail = ({navigation, route}: any) => {
 
     const handleWhatsapp = () => {
         Linking.openURL(`https://api.whatsapp.com/send?phone=55${profissional['phone']}&text=Ol%C3%A1!%20vim%20atrav%C3%A9s%20do%20iService%20saber%20mais%20sobre%20o%20seu%20trabalho.`);
-        81988276366
+    };
+
+    const handlePhone = () => {
+        Linking.openURL(`tel:${profissional['phone']}`);
     };
 
     const handleContact = (contact: string) => {
         setModalVisible(!isModalVisible);
-        // Alert.alert(
-        //     "Contato",
-        //     contact,
-        //     [
-        //       { text: "OK" }
-        //     ]
-        //   );
     }
     return (
         <Container>
@@ -64,9 +60,14 @@ const Detail = ({navigation, route}: any) => {
                             <ContactText>Contato</ContactText>
                             <ContactNumber>{profissional['phone']}</ContactNumber>
                         </ContactContainer>
-                        <BtnMenu onPress={() => { handleWhatsapp() }}>
-                            <BtnMenuText>conversar via whatsapp</BtnMenuText>
-                        </BtnMenu>
+                        <ContactButtonContainer>
+                            <BtnMenu onPress={() => { handleWhatsapp() }}>
+                                <BtnMenuText>Conversar via whatsapp</BtnMenuText>
+                            </BtnMenu>
+                            <BtnPhone onPress={() => { handlePhone() }}>
+                                <BtnMenuText>Ligar</BtnMenuText>
+                            </BtnPhone>
+                        </ContactButtonContainer>
                 </ModalContainer>
             </Modal>
         </Container>
