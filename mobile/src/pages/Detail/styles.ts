@@ -84,15 +84,20 @@ export const ModalContainer = styled.View`
     align-items: center;
     justify-content: center;
     background-color: #fff;
-    width: 75%;
+    width: 87%;
     height: 180px;
-    margin-left: 12%;
+    margin-left: 7%;
     border-radius: 8px;
-    /* align-items: center; */
-    /* justify-content: flex-start; */
 `;
 
 export const ContactContainer = styled.View``;
+
+export const ContactButtonContainer = styled.View`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+`;
 
 export const ContactText = styled.Text`
     font-weight: bold;
@@ -112,8 +117,21 @@ export const ModalScroll = styled.ScrollView``;
 export const BtnMenu = styled.TouchableOpacity`
     background-color: #25d366;
     height: 50px;
-    width: 150px;
+    width: 130px;
     margin-top: 20px;
+    /* margin-left: 10px; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+`;
+
+export const BtnPhone = styled.TouchableOpacity`
+    background-color: #334cb2;
+    height: 50px;
+    width: 130px;
+    margin-top: 20px;
+    margin-left: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
