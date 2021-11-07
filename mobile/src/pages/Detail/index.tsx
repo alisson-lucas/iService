@@ -14,6 +14,10 @@ import avatar from '../../../assets/images/misc/user-avatar.png';
 
 const Detail = ({navigation, route}: any) => {
     const [isModalVisible, setModalVisible] = useState(false);
+    const [professionalName, setProfessionalName] = useState<string | null>(null);
+    const [professionalPhone, setProfessionalPhone] = useState<string | null>(null);
+    const [professionalId, setProfessionalId] = useState<string | null>(null);
+
 
     const profissional =  route.params;
     const nav = useNavigation();
@@ -33,6 +37,19 @@ const Detail = ({navigation, route}: any) => {
     const handleContact = (contact: string) => {
         setModalVisible(!isModalVisible);
     }
+
+    const favoriteProfessional = () => {
+        const proName = profissional['name'];
+        const proPhone = profissional['phone'];
+
+        const favoriteds = {
+            proName,
+            proPhone
+        }
+
+        console.log('favoritado = ', favoriteds  )
+    }
+
     return (
         <Container>
             <Header>
@@ -46,7 +63,7 @@ const Detail = ({navigation, route}: any) => {
                 <DetailProvider>{ profissional['cpf'] }</DetailProvider>
                 <DetailDescription>{ profissional['description'] }</DetailDescription>
                 <ButtonContainer>
-                    <DetailButton>
+                    <DetailButton onPress={() => { favoriteProfessional() }}>
                         <ButtonText>Favoritar</ButtonText>
                     </DetailButton>
                     <DetailButton2>
